@@ -1,0 +1,404 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Advanced Tips &mdash; Vector SDK 0.6.0 documentation</title>
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+
+
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Downloads" href="downloads.html" />
+    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" />
+  <script>
+    /**
+     * Developer.anki.com Iframe Integration
+     */
+    (function(window) {
+      // Only apply if we're embedded
+      var parent = window.top;
+      if (parent === window || !parent || !parent.postMessage) {
+        return;
+      }
+
+      // For styling necessary only when embedded in an iframe.
+      function addEmbededClass() {
+        document.body.classList.add("embedded");
+      }
+
+      // Change document base to that of Developer.anki.com so that navigation happens at the top level.
+      function updateDocumentBase() {
+        var base = document.createElement('base');
+        base.target='_parent';
+        base.href= document.referrer;
+        var head = document.getElementsByTagName('head')[0];
+        var firstChild = head.firstChild;
+        head.insertBefore(base, firstChild);
+      }
+
+      // Signal to Developer.anki.com that we're done loading and ready to receive messages.
+      // We send page title to Developer.anki.com so that the browser displays it.
+      function notifyParentWindowOnLoad() {
+        parent.postMessage({
+          event: 'load',
+          docTitle: document.title
+        }, '*');
+      }
+
+      function initEmbeddedMode() {
+        addEmbededClass();
+        updateDocumentBase();
+        notifyParentWindowOnLoad();
+      }
+
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', function(){
+          initEmbeddedMode();
+        });
+      } else {
+        initEmbeddedMode();
+      }
+
+      // Handle messages from Developer.anki.com.
+      function receiveMessage(event) {
+        var eventName = event.data.event;
+        if(eventName === 'hashchange') {
+          window.location.hash = event.data.hash;
+          // Workaround for IOS Safari lack of support for window.location.hash scrolling.
+          var linkedElement = document.getElementById(event.data.hash.replace('#', ''))
+          if (linkedElement && linkedElement.scrollIntoView) {
+            linkedElement.scrollIntoView();
+          }
+        }
+      }
+      window.addEventListener("message", receiveMessage, false);
+
+    })(window);
+  </script>
+  <style>
+    /* Allows scrolling to anchor links on IOS Safari */
+    .embedded .wy-grid-for-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+  </style>
+  <!-- <script async src='https://www.google-analytics.com/analytics.js'></script> -->
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+
+  <div class="wy-grid-for-nav">
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+            <a href="index.html" class="icon icon-home"> Vector SDK
+
+
+
+          </a>
+
+
+
+
+              <div class="version">
+                0.6.0
+              </div>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+              <p class="caption"><span class="caption-text">Installation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-macos.html">Installation - macOS / OS X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-windows.html">Installation - Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-linux.html">Installation - Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Advanced Tips</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#moving-vector-between-wifi-networks">Moving Vector between WiFi networks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-mdns-discovery">1. Automatic: mDNS Discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manual-update-configuration">2. Manual: Update Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-multiple-vectors">Using multiple Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-anki-robot-serial">Set ANKI_ROBOT_SERIAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-anki-robot-host-and-vector-robot-name">Set ANKI_ROBOT_HOST and VECTOR_ROBOT_NAME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#keeping-vector-still-between-sdk-scripts">Keeping Vector Still Between SDK Scripts</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Downloads</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloads</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getstarted.html">Getting Started With the Vector SDK</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">The API</a></li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" aria-label="top navigation">
+
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vector SDK</a>
+
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+        <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+
+      <li><a href="index.html">Docs</a> &raquo;</li>
+
+      <li>Advanced Tips</li>
+
+
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="_sources/advanced-tips.rst.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+
+  </ul>
+
+
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="advanced-tips">
+<span id="id1"></span><h1>Advanced Tips<a class="headerlink" href="#advanced-tips" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="moving-vector-between-wifi-networks">
+<span id="moving-between-wifi"></span><h2>Moving Vector between WiFi networks<a class="headerlink" href="#moving-vector-between-wifi-networks" title="Permalink to this headline">¶</a></h2>
+<p>When you move Vector from one WiFi network to another (using the Vector App),
+or if your Vector’s IP changes, the SDK will need to determine Vector’s new IP address.
+There are two ways to accomplish this.</p>
+<div class="section" id="automatic-mdns-discovery">
+<h3>1. Automatic: mDNS Discovery<a class="headerlink" href="#automatic-mdns-discovery" title="Permalink to this headline">¶</a></h3>
+<p>The SDK will automatically discover your Vector, even on a new WiFi network,
+when you connect as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Vector-A1B2&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="c1"># The sdk will try to connect to &#39;Vector A1B2&#39;,</span>
+    <span class="c1"># even if its IP address has changed.</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>You will need to install the <code class="docutils literal notranslate"><span class="pre">zeroconf</span></code> package to use this feature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">zeroconf</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="manual-update-configuration">
+<h3>2. Manual: Update Configuration<a class="headerlink" href="#manual-update-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, you can manually make changes to your SDK setup. To assist in this migration, the <code class="docutils literal notranslate"><span class="pre">anki_vector.configure</span></code>
+executable submodule provides a <code class="docutils literal notranslate"><span class="pre">-u</span></code> parameter to quickly reconnect to Vector.</p>
+<p>To update your connection, you will need to find the IP address on
+Vector’s face, and the serial number of the robot you are updating.
+Then from your terminal run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">configure</span> <span class="o">-</span><span class="n">u</span> <span class="s2">&quot;&lt;your_new_ip&gt;&quot;</span> <span class="o">-</span><span class="n">s</span> <span class="s2">&quot;&lt;your_robot_serial_number&gt;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-multiple-vectors">
+<h2>Using multiple Vectors<a class="headerlink" href="#using-multiple-vectors" title="Permalink to this headline">¶</a></h2>
+<p>If your device is configured to use more than one robot, you can specify
+which robot you want to use by passing its serial number as a parameter
+to the Robot constructor:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="s2">&quot;00e20142&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+  <span class="n">robot</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">play_animation_trigger</span><span class="p">(</span><span class="s2">&quot;GreetAfterLongTime&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, you can pass a <code class="docutils literal notranslate"><span class="pre">--serial</span></code> flag on the command
+line, and <code class="docutils literal notranslate"><span class="pre">anki_vector.util.parse_command_args</span></code> will parse out
+the serial number:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="mi">01</span><span class="n">_hello_world</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">serial</span> <span class="mf">00e20142</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-anki-robot-serial">
+<h2>Set ANKI_ROBOT_SERIAL<a class="headerlink" href="#set-anki-robot-serial" title="Permalink to this headline">¶</a></h2>
+<p>In order to avoid entering Vector’s serial number for each program run,
+you can create environment variable <code class="docutils literal notranslate"><span class="pre">ANKI_ROBOT_SERIAL</span></code>
+and set it to Vector’s serial number:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">ANKI_ROBOT_SERIAL</span><span class="o">=</span><span class="mf">00e20100</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-anki-robot-host-and-vector-robot-name">
+<h2>Set ANKI_ROBOT_HOST and VECTOR_ROBOT_NAME<a class="headerlink" href="#set-anki-robot-host-and-vector-robot-name" title="Permalink to this headline">¶</a></h2>
+<p>When running the <code class="docutils literal notranslate"><span class="pre">anki_vector.configure</span></code> executable submodule, you must provide Vector’s ip and name.
+To avoid typing these in, you can instead create environment variables
+ANKI_ROBOT_HOST and VECTOR_ROBOT_NAME. Then <code class="docutils literal notranslate"><span class="pre">anki_vector.configure</span></code> will automatically pick
+up those settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">ANKI_ROBOT_HOST</span><span class="o">=</span><span class="s2">&quot;192.168.42.42&quot;</span>
+<span class="n">export</span> <span class="n">VECTOR_ROBOT_NAME</span><span class="o">=</span><span class="n">Vector</span><span class="o">-</span><span class="n">A1B2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="keeping-vector-still-between-sdk-scripts">
+<h2>Keeping Vector Still Between SDK Scripts<a class="headerlink" href="#keeping-vector-still-between-sdk-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Vector can be controlled so that (like Cozmo) he will not move between SDK scripts.  There are three options for entering this mode of operation:</p>
+<ul class="simple">
+<li><p>Control can be reserved from the command prompt: <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">anki_vector.reserve_control</span></code>  Vector will remain still between SDK scripts until the script/process is exited.</p></li>
+<li><p>There are OS-specific scripts (Mac/Win) in the <code class="docutils literal notranslate"><span class="pre">examples/scripts/</span></code> folder that can be double-clicked to more easily reserve behavior control.  The script will open in a new window; closing the window or otherwise stopping the script will release control back to the built-in robot behaviors.</p></li>
+<li><p>A single Python file can explicitly reserve control using the <code class="docutils literal notranslate"><span class="pre">ReserveBehaviorControl</span></code> object.  Consult the <code class="docutils literal notranslate"><span class="pre">anki_vector.connection</span></code> <a class="reference external" href="https://developer.anki.com/vector/docs/generated/anki_vector.connection.html">documentation</a> for more information.</p></li>
+</ul>
+<p>While normal robot behaviors are suppressed, Vector may look ‘broken’.  Closing the SDK scripts, disconnecting from the
+robot, or restarting the robot will all release behavior control.</p>
+<hr class="docutils" />
+<p><a class="reference external" href="https://www.anki.com/en-us/company/terms-and-conditions">Terms and Conditions</a> and <a class="reference external" href="https://www.anki.com/en-us/company/privacy">Privacy Policy</a></p>
+<p><a class="reference external" href="https://developer.anki.com">Click here to return to the Anki Developer website.</a></p>
+</div>
+</div>
+
+
+           </div>
+
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="downloads.html" class="btn btn-neutral float-right" title="Downloads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+        <a href="troubleshooting.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anki
+      <span class="lastupdated">
+        Last updated on Apr, 30, 2019 10:42:16 Coordinated Universal Time.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+
+
+
+
+
+</body>
+</html>

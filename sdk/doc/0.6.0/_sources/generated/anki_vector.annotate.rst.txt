@@ -1,0 +1,36 @@
+anki\_vector.annotate
+=====================
+
+.. automodule:: anki_vector.annotate
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_img_box_to_image
+      add_polygon_to_image
+      annotator
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AnnotationPosition
+      Annotator
+      FaceAnnotator
+      ImageAnnotator
+      ImageText
+      ObjectAnnotator
+      TextAnnotator
+   
+   
+
+   
+   
+   

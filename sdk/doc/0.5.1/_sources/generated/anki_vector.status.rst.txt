@@ -1,0 +1,22 @@
+anki\_vector.status
+===================
+
+.. automodule:: anki_vector.status
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      RobotStatus
+   
+   
+
+   
+   
+   

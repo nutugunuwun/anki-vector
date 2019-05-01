@@ -1,0 +1,698 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>anki_vector.user_intent &mdash; Vector SDK 0.6.0 documentation</title>
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+
+
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="anki_vector.util" href="anki_vector.util.html" />
+    <link rel="prev" title="anki_vector.touch" href="anki_vector.touch.html" />
+  <script>
+    /**
+     * Developer.anki.com Iframe Integration
+     */
+    (function(window) {
+      // Only apply if we're embedded
+      var parent = window.top;
+      if (parent === window || !parent || !parent.postMessage) {
+        return;
+      }
+
+      // For styling necessary only when embedded in an iframe.
+      function addEmbededClass() {
+        document.body.classList.add("embedded");
+      }
+
+      // Change document base to that of Developer.anki.com so that navigation happens at the top level.
+      function updateDocumentBase() {
+        var base = document.createElement('base');
+        base.target='_parent';
+        base.href= document.referrer;
+        var head = document.getElementsByTagName('head')[0];
+        var firstChild = head.firstChild;
+        head.insertBefore(base, firstChild);
+      }
+
+      // Signal to Developer.anki.com that we're done loading and ready to receive messages.
+      // We send page title to Developer.anki.com so that the browser displays it.
+      function notifyParentWindowOnLoad() {
+        parent.postMessage({
+          event: 'load',
+          docTitle: document.title
+        }, '*');
+      }
+
+      function initEmbeddedMode() {
+        addEmbededClass();
+        updateDocumentBase();
+        notifyParentWindowOnLoad();
+      }
+
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', function(){
+          initEmbeddedMode();
+        });
+      } else {
+        initEmbeddedMode();
+      }
+
+      // Handle messages from Developer.anki.com.
+      function receiveMessage(event) {
+        var eventName = event.data.event;
+        if(eventName === 'hashchange') {
+          window.location.hash = event.data.hash;
+          // Workaround for IOS Safari lack of support for window.location.hash scrolling.
+          var linkedElement = document.getElementById(event.data.hash.replace('#', ''))
+          if (linkedElement && linkedElement.scrollIntoView) {
+            linkedElement.scrollIntoView();
+          }
+        }
+      }
+      window.addEventListener("message", receiveMessage, false);
+
+    })(window);
+  </script>
+  <style>
+    /* Allows scrolling to anchor links on IOS Safari */
+    .embedded .wy-grid-for-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+  </style>
+  <!-- <script async src='https://www.google-analytics.com/analytics.js'></script> -->
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+
+  <div class="wy-grid-for-nav">
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+            <a href="../index.html" class="icon icon-home"> Vector SDK
+
+
+
+          </a>
+
+
+
+
+              <div class="version">
+                0.6.0
+              </div>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+              <p class="caption"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../initial.html">Initial Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-macos.html">Installation - macOS / OS X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-windows.html">Installation - Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-linux.html">Installation - Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced-tips.html">Advanced Tips</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Downloads</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getstarted.html">Getting Started With the Vector SDK</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">The API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.html">anki_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.animation.html">anki_vector.animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.annotate.html">anki_vector.annotate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.audio.html">anki_vector.audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.behavior.html">anki_vector.behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.camera.html">anki_vector.camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.camera_viewer.html">anki_vector.camera_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.color.html">anki_vector.color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.connection.html">anki_vector.connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.events.html">anki_vector.events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.exceptions.html">anki_vector.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.faces.html">anki_vector.faces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.lights.html">anki_vector.lights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.mdns.html">anki_vector.mdns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.messaging.html">anki_vector.messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.motors.html">anki_vector.motors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.nav_map.html">anki_vector.nav_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.objects.html">anki_vector.objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.html">anki_vector.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl.html">anki_vector.opengl.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl_vector.html">anki_vector.opengl.opengl_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl_viewer.html">anki_vector.opengl.opengl_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.photos.html">anki_vector.photos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.proximity.html">anki_vector.proximity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.robot.html">anki_vector.robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.screen.html">anki_vector.screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.status.html">anki_vector.status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.touch.html">anki_vector.touch</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">anki_vector.user_intent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.util.html">anki_vector.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.viewer.html">anki_vector.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.vision.html">anki_vector.vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.world.html">anki_vector.world</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" aria-label="top navigation">
+
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vector SDK</a>
+
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+        <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+
+          <li><a href="../api.html">The API</a> &raquo;</li>
+
+      <li>anki_vector.user_intent</li>
+
+
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="../_sources/generated/anki_vector.user_intent.rst.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+
+  </ul>
+
+
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="module-anki_vector.user_intent">
+<span id="anki-vector-user-intent"></span><h1>anki_vector.user_intent<a class="headerlink" href="#module-anki_vector.user_intent" title="Permalink to this headline">¶</a></h1>
+<p>Class and enumeration related to voice commands received by Vector.</p>
+<p>When under SDK behavior control, recognized voice commands will be sent as
+events.  SDK users can respond with their own scripted actions.</p>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-center">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.user_intent.UserIntent" title="anki_vector.user_intent.UserIntent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UserIntent</span></code></a>(event)</p></td>
+<td><p>Class for containing voice command information from the event stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#anki_vector.user_intent.UserIntentEvent" title="anki_vector.user_intent.UserIntentEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UserIntentEvent</span></code></a></p></td>
+<td><p>List of UserIntent events available to the SDK.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="anki_vector.user_intent.UserIntentEvent">
+<em class="property">class </em><code class="descclassname">anki_vector.user_intent.</code><code class="descname">UserIntentEvent</code><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of UserIntent events available to the SDK.</p>
+<p>Vector’s voice recognition allows for variation in
+grammar and word selection, so the examples are not
+the only way to invoke the voice commands.</p>
+<p>This list reflect only the voice commands available
+to the SDK, as some are not available for development
+use.</p>
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.character_age">
+<code class="descname">character_age</code><em class="property"> = 0</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.character_age" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “How old are you?”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.check_timer">
+<code class="descname">check_timer</code><em class="property"> = 1</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.check_timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Check the timer.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.explore_start">
+<code class="descname">explore_start</code><em class="property"> = 2</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.explore_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Go explore.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.global_stop">
+<code class="descname">global_stop</code><em class="property"> = 3</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.global_stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Stop the timer.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.greeting_goodbye">
+<code class="descname">greeting_goodbye</code><em class="property"> = 4</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.greeting_goodbye" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Goodbye!”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.greeting_goodmorning">
+<code class="descname">greeting_goodmorning</code><em class="property"> = 5</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.greeting_goodmorning" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Good morning!”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.greeting_hello">
+<code class="descname">greeting_hello</code><em class="property"> = 6</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.greeting_hello" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Hello!”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_abuse">
+<code class="descname">imperative_abuse</code><em class="property"> = 7</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_abuse" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “I hate you.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_affirmative">
+<code class="descname">imperative_affirmative</code><em class="property"> = 8</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_affirmative" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Yes.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_apology">
+<code class="descname">imperative_apology</code><em class="property"> = 9</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_apology" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “I’m sorry.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_come">
+<code class="descname">imperative_come</code><em class="property"> = 10</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_come" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Come here.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_dance">
+<code class="descname">imperative_dance</code><em class="property"> = 11</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_dance" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Dance.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_fetchcube">
+<code class="descname">imperative_fetchcube</code><em class="property"> = 12</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_fetchcube" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Fetch your cube.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_findcube">
+<code class="descname">imperative_findcube</code><em class="property"> = 13</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_findcube" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Find your cube.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_lookatme">
+<code class="descname">imperative_lookatme</code><em class="property"> = 14</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_lookatme" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Look at me.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_love">
+<code class="descname">imperative_love</code><em class="property"> = 15</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_love" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “I love you.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_negative">
+<code class="descname">imperative_negative</code><em class="property"> = 17</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_negative" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “No.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_praise">
+<code class="descname">imperative_praise</code><em class="property"> = 16</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_praise" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Good Robot.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_scold">
+<code class="descname">imperative_scold</code><em class="property"> = 18</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_scold" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Bad Robot.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_volumedown">
+<code class="descname">imperative_volumedown</code><em class="property"> = 21</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_volumedown" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Volume down.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_volumelevel">
+<code class="descname">imperative_volumelevel</code><em class="property"> = 19</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_volumelevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Volume 2.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.imperative_volumeup">
+<code class="descname">imperative_volumeup</code><em class="property"> = 20</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.imperative_volumeup" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Volume up.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.knowledge_question">
+<code class="descname">knowledge_question</code><em class="property"> = 27</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.knowledge_question" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “I have a question.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.movement_backward">
+<code class="descname">movement_backward</code><em class="property"> = 23</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.movement_backward" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Go backward.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.movement_forward">
+<code class="descname">movement_forward</code><em class="property"> = 22</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.movement_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Go forward.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.movement_turnaround">
+<code class="descname">movement_turnaround</code><em class="property"> = 26</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.movement_turnaround" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Turn around.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.movement_turnleft">
+<code class="descname">movement_turnleft</code><em class="property"> = 24</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.movement_turnleft" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Turn left.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.movement_turnright">
+<code class="descname">movement_turnright</code><em class="property"> = 25</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.movement_turnright" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Turn right.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.names_ask">
+<code class="descname">names_ask</code><em class="property"> = 28</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.names_ask" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “What’s my name?”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.play_anygame">
+<code class="descname">play_anygame</code><em class="property"> = 29</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.play_anygame" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Play a game.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.play_anytrick">
+<code class="descname">play_anytrick</code><em class="property"> = 30</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.play_anytrick" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Play a trick.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.play_blackjack">
+<code class="descname">play_blackjack</code><em class="property"> = 31</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.play_blackjack" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Let’s play Blackjack.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.play_fistbump">
+<code class="descname">play_fistbump</code><em class="property"> = 32</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.play_fistbump" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Fist bump.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.play_pickupcube">
+<code class="descname">play_pickupcube</code><em class="property"> = 33</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.play_pickupcube" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Pick up your cube.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.play_popawheelie">
+<code class="descname">play_popawheelie</code><em class="property"> = 34</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.play_popawheelie" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Pop a wheelie.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.play_rollcube">
+<code class="descname">play_rollcube</code><em class="property"> = 35</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.play_rollcube" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Roll your cube.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.seasonal_happyholidays">
+<code class="descname">seasonal_happyholidays</code><em class="property"> = 36</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.seasonal_happyholidays" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Happy holidays!”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.seasonal_happynewyear">
+<code class="descname">seasonal_happynewyear</code><em class="property"> = 37</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.seasonal_happynewyear" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Happy new year!”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.set_timer">
+<code class="descname">set_timer</code><em class="property"> = 38</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.set_timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Set timer for 10 minutes”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.show_clock">
+<code class="descname">show_clock</code><em class="property"> = 39</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.show_clock" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “What time is it?”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.take_a_photo">
+<code class="descname">take_a_photo</code><em class="property"> = 40</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.take_a_photo" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “Take a selfie.”</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntentEvent.weather_response">
+<code class="descname">weather_response</code><em class="property"> = 41</em><a class="headerlink" href="#anki_vector.user_intent.UserIntentEvent.weather_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>example  “What is the weather report?”</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.user_intent.UserIntent">
+<em class="property">class </em><code class="descclassname">anki_vector.user_intent.</code><code class="descname">UserIntent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.user_intent.UserIntent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for containing voice command information from the event stream.
+This class, and the contained <a class="reference internal" href="#anki_vector.user_intent.UserIntentEvent" title="anki_vector.user_intent.UserIntentEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserIntentEvent</span></code></a> include all of the
+voice commands that the SDK can intercept.</p>
+<p>Some UserIntents include information returned from the cloud and used
+when evaluating the voice commands.  This information can be parsed as
+a JSON formatted string.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="kn">from</span> <span class="nn">anki_vector.events</span> <span class="k">import</span> <span class="n">Events</span>
+<span class="kn">from</span> <span class="nn">anki_vector.user_intent</span> <span class="k">import</span> <span class="n">UserIntent</span><span class="p">,</span> <span class="n">UserIntentEvent</span>
+
+<span class="k">def</span> <span class="nf">on_user_intent</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">done</span><span class="p">):</span>
+    <span class="n">user_intent</span> <span class="o">=</span> <span class="n">UserIntent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user_intent</span><span class="o">.</span><span class="n">intent_event</span> <span class="ow">is</span> <span class="n">UserIntentEvent</span><span class="o">.</span><span class="n">weather_response</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">user_intent</span><span class="o">.</span><span class="n">intent_data</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Weather report for </span><span class="si">{data[&#39;speakableLocationString&#39;]}</span><span class="s2">: &quot;</span>
+              <span class="n">f</span><span class="s2">&quot;</span><span class="si">{data[&#39;condition&#39;]}</span><span class="s2">, temperature </span><span class="si">{data[&#39;temperature&#39;]}</span><span class="s2"> degrees&quot;</span><span class="p">)</span>
+        <span class="n">done</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">on_user_intent</span><span class="p">,</span> <span class="n">Events</span><span class="o">.</span><span class="n">user_intent</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------ Vector is waiting to be asked &quot;Hey Vector!  What is the weather report?&quot; Press ctrl+c to exit early ------&#39;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">done</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------ Vector never heard a request for the weather report ------&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – an event containing UserIntent data</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntent.intent_data">
+<code class="descname">intent_data</code><a class="headerlink" href="#anki_vector.user_intent.UserIntent.intent_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>This gives access to any voice command specific data in JSON format.</p>
+<p>Some voice commands contain information from processing.  For example, asking Vector
+“Hey Vector, what is the weather?” will return the current location and the weather
+forecast.</p>
+<p>Voice commands without additional information will have an empty intent_data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.user_intent.UserIntent.intent_event">
+<code class="descname">intent_event</code><a class="headerlink" href="#anki_vector.user_intent.UserIntent.intent_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>This returns the voice command event as a UserIntentEvent</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#anki_vector.user_intent.UserIntentEvent" title="anki_vector.user_intent.UserIntentEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserIntentEvent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="anki_vector.util.html" class="btn btn-neutral float-right" title="anki_vector.util" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+        <a href="anki_vector.touch.html" class="btn btn-neutral float-left" title="anki_vector.touch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anki
+      <span class="lastupdated">
+        Last updated on Apr, 30, 2019 10:42:16 Coordinated Universal Time.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+
+
+
+
+
+</body>
+</html>

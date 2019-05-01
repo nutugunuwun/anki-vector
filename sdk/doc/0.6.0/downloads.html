@@ -1,0 +1,326 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Downloads &mdash; Vector SDK 0.6.0 documentation</title>
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+
+
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started With the Vector SDK" href="getstarted.html" />
+    <link rel="prev" title="Advanced Tips" href="advanced-tips.html" />
+  <script>
+    /**
+     * Developer.anki.com Iframe Integration
+     */
+    (function(window) {
+      // Only apply if we're embedded
+      var parent = window.top;
+      if (parent === window || !parent || !parent.postMessage) {
+        return;
+      }
+
+      // For styling necessary only when embedded in an iframe.
+      function addEmbededClass() {
+        document.body.classList.add("embedded");
+      }
+
+      // Change document base to that of Developer.anki.com so that navigation happens at the top level.
+      function updateDocumentBase() {
+        var base = document.createElement('base');
+        base.target='_parent';
+        base.href= document.referrer;
+        var head = document.getElementsByTagName('head')[0];
+        var firstChild = head.firstChild;
+        head.insertBefore(base, firstChild);
+      }
+
+      // Signal to Developer.anki.com that we're done loading and ready to receive messages.
+      // We send page title to Developer.anki.com so that the browser displays it.
+      function notifyParentWindowOnLoad() {
+        parent.postMessage({
+          event: 'load',
+          docTitle: document.title
+        }, '*');
+      }
+
+      function initEmbeddedMode() {
+        addEmbededClass();
+        updateDocumentBase();
+        notifyParentWindowOnLoad();
+      }
+
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', function(){
+          initEmbeddedMode();
+        });
+      } else {
+        initEmbeddedMode();
+      }
+
+      // Handle messages from Developer.anki.com.
+      function receiveMessage(event) {
+        var eventName = event.data.event;
+        if(eventName === 'hashchange') {
+          window.location.hash = event.data.hash;
+          // Workaround for IOS Safari lack of support for window.location.hash scrolling.
+          var linkedElement = document.getElementById(event.data.hash.replace('#', ''))
+          if (linkedElement && linkedElement.scrollIntoView) {
+            linkedElement.scrollIntoView();
+          }
+        }
+      }
+      window.addEventListener("message", receiveMessage, false);
+
+    })(window);
+  </script>
+  <style>
+    /* Allows scrolling to anchor links on IOS Safari */
+    .embedded .wy-grid-for-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+  </style>
+  <!-- <script async src='https://www.google-analytics.com/analytics.js'></script> -->
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+
+  <div class="wy-grid-for-nav">
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+            <a href="index.html" class="icon icon-home"> Vector SDK
+
+
+
+          </a>
+
+
+
+
+              <div class="version">
+                0.6.0
+              </div>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+              <p class="caption"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-macos.html">Installation - macOS / OS X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-windows.html">Installation - Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-linux.html">Installation - Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-tips.html">Advanced Tips</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Downloads</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Downloads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sdk-examples">SDK Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#github">GitHub</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getstarted.html">Getting Started With the Vector SDK</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">The API</a></li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" aria-label="top navigation">
+
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vector SDK</a>
+
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+        <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+
+      <li><a href="index.html">Docs</a> &raquo;</li>
+
+      <li>Downloads</li>
+
+
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="_sources/downloads.rst.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+
+  </ul>
+
+
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="downloads">
+<h1>Downloads<a class="headerlink" href="#downloads" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sdk-examples">
+<h2>SDK Examples<a class="headerlink" href="#sdk-examples" title="Permalink to this headline">¶</a></h2>
+<p>Download Python example scripts that use the Vector SDK.</p>
+<p><a class="reference external" href="https://sdk-resources.anki.com/vector/0.6.0/anki_vector_sdk_examples_0.6.0.tar.gz">macOS/Linux SDK Examples</a></p>
+<p><a class="reference external" href="https://sdk-resources.anki.com/vector/0.6.0/anki_vector_sdk_examples_0.6.0.zip">Windows SDK Examples</a></p>
+</div>
+<div class="section" id="github">
+<h2>GitHub<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h2>
+<p>Clone, fork, or report issues on the <a class="reference external" href="https://github.com/anki/vector-python-sdk">GitHub vector-python-sdk repository</a>.</p>
+<hr class="docutils" />
+<p><a class="reference external" href="https://www.anki.com/en-us/company/terms-and-conditions">Terms and Conditions</a> and <a class="reference external" href="https://www.anki.com/en-us/company/privacy">Privacy Policy</a></p>
+<p><a class="reference external" href="https://developer.anki.com">Click here to return to the Anki Developer website.</a></p>
+</div>
+</div>
+
+
+           </div>
+
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="getstarted.html" class="btn btn-neutral float-right" title="Getting Started With the Vector SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+        <a href="advanced-tips.html" class="btn btn-neutral float-left" title="Advanced Tips" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anki
+      <span class="lastupdated">
+        Last updated on Apr, 30, 2019 10:42:16 Coordinated Universal Time.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+
+
+
+
+
+</body>
+</html>

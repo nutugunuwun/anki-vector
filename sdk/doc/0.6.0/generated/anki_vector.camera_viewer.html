@@ -1,0 +1,424 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>anki_vector.camera_viewer &mdash; Vector SDK 0.6.0 documentation</title>
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+
+
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="anki_vector.color" href="anki_vector.color.html" />
+    <link rel="prev" title="anki_vector.camera" href="anki_vector.camera.html" />
+  <script>
+    /**
+     * Developer.anki.com Iframe Integration
+     */
+    (function(window) {
+      // Only apply if we're embedded
+      var parent = window.top;
+      if (parent === window || !parent || !parent.postMessage) {
+        return;
+      }
+
+      // For styling necessary only when embedded in an iframe.
+      function addEmbededClass() {
+        document.body.classList.add("embedded");
+      }
+
+      // Change document base to that of Developer.anki.com so that navigation happens at the top level.
+      function updateDocumentBase() {
+        var base = document.createElement('base');
+        base.target='_parent';
+        base.href= document.referrer;
+        var head = document.getElementsByTagName('head')[0];
+        var firstChild = head.firstChild;
+        head.insertBefore(base, firstChild);
+      }
+
+      // Signal to Developer.anki.com that we're done loading and ready to receive messages.
+      // We send page title to Developer.anki.com so that the browser displays it.
+      function notifyParentWindowOnLoad() {
+        parent.postMessage({
+          event: 'load',
+          docTitle: document.title
+        }, '*');
+      }
+
+      function initEmbeddedMode() {
+        addEmbededClass();
+        updateDocumentBase();
+        notifyParentWindowOnLoad();
+      }
+
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', function(){
+          initEmbeddedMode();
+        });
+      } else {
+        initEmbeddedMode();
+      }
+
+      // Handle messages from Developer.anki.com.
+      function receiveMessage(event) {
+        var eventName = event.data.event;
+        if(eventName === 'hashchange') {
+          window.location.hash = event.data.hash;
+          // Workaround for IOS Safari lack of support for window.location.hash scrolling.
+          var linkedElement = document.getElementById(event.data.hash.replace('#', ''))
+          if (linkedElement && linkedElement.scrollIntoView) {
+            linkedElement.scrollIntoView();
+          }
+        }
+      }
+      window.addEventListener("message", receiveMessage, false);
+
+    })(window);
+  </script>
+  <style>
+    /* Allows scrolling to anchor links on IOS Safari */
+    .embedded .wy-grid-for-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+  </style>
+  <!-- <script async src='https://www.google-analytics.com/analytics.js'></script> -->
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+
+  <div class="wy-grid-for-nav">
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+            <a href="../index.html" class="icon icon-home"> Vector SDK
+
+
+
+          </a>
+
+
+
+
+              <div class="version">
+                0.6.0
+              </div>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+              <p class="caption"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../initial.html">Initial Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-macos.html">Installation - macOS / OS X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-windows.html">Installation - Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-linux.html">Installation - Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced-tips.html">Advanced Tips</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Downloads</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getstarted.html">Getting Started With the Vector SDK</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">The API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.html">anki_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.animation.html">anki_vector.animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.annotate.html">anki_vector.annotate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.audio.html">anki_vector.audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.behavior.html">anki_vector.behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.camera.html">anki_vector.camera</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">anki_vector.camera_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.color.html">anki_vector.color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.connection.html">anki_vector.connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.events.html">anki_vector.events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.exceptions.html">anki_vector.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.faces.html">anki_vector.faces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.lights.html">anki_vector.lights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.mdns.html">anki_vector.mdns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.messaging.html">anki_vector.messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.motors.html">anki_vector.motors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.nav_map.html">anki_vector.nav_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.objects.html">anki_vector.objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.html">anki_vector.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl.html">anki_vector.opengl.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl_vector.html">anki_vector.opengl.opengl_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl_viewer.html">anki_vector.opengl.opengl_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.photos.html">anki_vector.photos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.proximity.html">anki_vector.proximity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.robot.html">anki_vector.robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.screen.html">anki_vector.screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.status.html">anki_vector.status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.touch.html">anki_vector.touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.user_intent.html">anki_vector.user_intent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.util.html">anki_vector.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.viewer.html">anki_vector.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.vision.html">anki_vector.vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.world.html">anki_vector.world</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" aria-label="top navigation">
+
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vector SDK</a>
+
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+        <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+
+          <li><a href="../api.html">The API</a> &raquo;</li>
+
+      <li>anki_vector.camera_viewer</li>
+
+
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="../_sources/generated/anki_vector.camera_viewer.rst.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+
+  </ul>
+
+
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="module-anki_vector.camera_viewer">
+<span id="anki-vector-camera-viewer"></span><h1>anki_vector.camera_viewer<a class="headerlink" href="#module-anki_vector.camera_viewer" title="Permalink to this headline">¶</a></h1>
+<p>This module provides the camera viewer’s render process.</p>
+<p>It should be launched in a separate process to allow Vector to run freely while
+the viewer is rendering.</p>
+<p>It uses Tkinter, a standard Python GUI package.
+It also depends on the Pillow library for image processing.</p>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-center">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.camera_viewer.main" title="anki_vector.camera_viewer.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>(queue, event[, overlays, timeout, …])</p></td>
+<td><p>Rendering the frames in another process.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-center">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.camera_viewer.TkCameraViewer" title="anki_vector.camera_viewer.TkCameraViewer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TkCameraViewer</span></code></a>(queue, event[, overlays, …])</p></td>
+<td><p>A Tkinter based camera video feed.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="anki_vector.camera_viewer.TkCameraViewer">
+<em class="property">class </em><code class="descclassname">anki_vector.camera_viewer.</code><code class="descname">TkCameraViewer</code><span class="sig-paren">(</span><em>queue</em>, <em>event</em>, <em>overlays=None</em>, <em>timeout=10.0</em>, <em>force_on_top=True</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera_viewer.TkCameraViewer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Tkinter based camera video feed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queue</strong> (<em>&lt;bound method BaseContext.Queue of &lt;multiprocessing.context.DefaultContext object at 0x1103e5588&gt;&gt;</em>) – A queue to send frames between the user’s main thread and the viewer process.</p></li>
+<li><p><strong>event</strong> (<em>&lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x1103e5588&gt;&gt;</em>) – An event to signal that the viewer process has closed.</p></li>
+<li><p><strong>overlays</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]) – Overlays to be drawn on the images of the renderer.</p></li>
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – The time without a new frame before the process will exit.</p></li>
+<li><p><strong>force_on_top</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Specifies whether the window should be forced on top of all others.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="anki_vector.camera_viewer.TkCameraViewer.draw_frame">
+<code class="descname">draw_frame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera_viewer.TkCameraViewer.draw_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display an image on to a Tkinter label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="anki_vector.camera_viewer.main">
+<code class="descclassname">anki_vector.camera_viewer.</code><code class="descname">main</code><span class="sig-paren">(</span><em>queue</em>, <em>event</em>, <em>overlays=None</em>, <em>timeout=10.0</em>, <em>force_on_top=False</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera_viewer.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendering the frames in another process. This allows the UI to have the
+main thread of its process while the user code continues to execute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queue</strong> (<em>&lt;bound method BaseContext.Queue of &lt;multiprocessing.context.DefaultContext object at 0x1103e5588&gt;&gt;</em>) – A queue to send frames between the user’s main thread and the viewer process.</p></li>
+<li><p><strong>event</strong> (<em>&lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x1103e5588&gt;&gt;</em>) – An event to signal that the viewer process has closed.</p></li>
+<li><p><strong>overlays</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]) – Overlays to be drawn on the images of the renderer.</p></li>
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – The time without a new frame before the process will exit.</p></li>
+<li><p><strong>force_on_top</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Specifies whether the window should be forced on top of all others.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="anki_vector.color.html" class="btn btn-neutral float-right" title="anki_vector.color" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+        <a href="anki_vector.camera.html" class="btn btn-neutral float-left" title="anki_vector.camera" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anki
+      <span class="lastupdated">
+        Last updated on Apr, 30, 2019 10:42:16 Coordinated Universal Time.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+
+
+
+
+
+</body>
+</html>

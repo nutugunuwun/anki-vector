@@ -1,0 +1,22 @@
+anki\_vector.mdns
+=================
+
+.. automodule:: anki_vector.mdns
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      VectorMdns
+   
+   
+
+   
+   
+   

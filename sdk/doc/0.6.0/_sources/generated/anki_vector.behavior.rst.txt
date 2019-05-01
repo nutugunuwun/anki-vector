@@ -1,0 +1,23 @@
+anki\_vector.behavior
+=====================
+
+.. automodule:: anki_vector.behavior
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      BehaviorComponent
+      ReserveBehaviorControl
+   
+   
+
+   
+   
+   

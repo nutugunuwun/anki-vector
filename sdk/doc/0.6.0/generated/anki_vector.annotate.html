@@ -1,0 +1,888 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>anki_vector.annotate &mdash; Vector SDK 0.6.0 documentation</title>
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+
+
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="anki_vector.audio" href="anki_vector.audio.html" />
+    <link rel="prev" title="anki_vector.animation" href="anki_vector.animation.html" />
+  <script>
+    /**
+     * Developer.anki.com Iframe Integration
+     */
+    (function(window) {
+      // Only apply if we're embedded
+      var parent = window.top;
+      if (parent === window || !parent || !parent.postMessage) {
+        return;
+      }
+
+      // For styling necessary only when embedded in an iframe.
+      function addEmbededClass() {
+        document.body.classList.add("embedded");
+      }
+
+      // Change document base to that of Developer.anki.com so that navigation happens at the top level.
+      function updateDocumentBase() {
+        var base = document.createElement('base');
+        base.target='_parent';
+        base.href= document.referrer;
+        var head = document.getElementsByTagName('head')[0];
+        var firstChild = head.firstChild;
+        head.insertBefore(base, firstChild);
+      }
+
+      // Signal to Developer.anki.com that we're done loading and ready to receive messages.
+      // We send page title to Developer.anki.com so that the browser displays it.
+      function notifyParentWindowOnLoad() {
+        parent.postMessage({
+          event: 'load',
+          docTitle: document.title
+        }, '*');
+      }
+
+      function initEmbeddedMode() {
+        addEmbededClass();
+        updateDocumentBase();
+        notifyParentWindowOnLoad();
+      }
+
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', function(){
+          initEmbeddedMode();
+        });
+      } else {
+        initEmbeddedMode();
+      }
+
+      // Handle messages from Developer.anki.com.
+      function receiveMessage(event) {
+        var eventName = event.data.event;
+        if(eventName === 'hashchange') {
+          window.location.hash = event.data.hash;
+          // Workaround for IOS Safari lack of support for window.location.hash scrolling.
+          var linkedElement = document.getElementById(event.data.hash.replace('#', ''))
+          if (linkedElement && linkedElement.scrollIntoView) {
+            linkedElement.scrollIntoView();
+          }
+        }
+      }
+      window.addEventListener("message", receiveMessage, false);
+
+    })(window);
+  </script>
+  <style>
+    /* Allows scrolling to anchor links on IOS Safari */
+    .embedded .wy-grid-for-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+  </style>
+  <!-- <script async src='https://www.google-analytics.com/analytics.js'></script> -->
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+
+  <div class="wy-grid-for-nav">
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+            <a href="../index.html" class="icon icon-home"> Vector SDK
+
+
+
+          </a>
+
+
+
+
+              <div class="version">
+                0.6.0
+              </div>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+              <p class="caption"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../initial.html">Initial Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-macos.html">Installation - macOS / OS X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-windows.html">Installation - Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-linux.html">Installation - Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced-tips.html">Advanced Tips</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Downloads</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getstarted.html">Getting Started With the Vector SDK</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">The API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.html">anki_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.animation.html">anki_vector.animation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">anki_vector.annotate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.audio.html">anki_vector.audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.behavior.html">anki_vector.behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.camera.html">anki_vector.camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.camera_viewer.html">anki_vector.camera_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.color.html">anki_vector.color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.connection.html">anki_vector.connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.events.html">anki_vector.events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.exceptions.html">anki_vector.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.faces.html">anki_vector.faces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.lights.html">anki_vector.lights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.mdns.html">anki_vector.mdns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.messaging.html">anki_vector.messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.motors.html">anki_vector.motors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.nav_map.html">anki_vector.nav_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.objects.html">anki_vector.objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.html">anki_vector.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl.html">anki_vector.opengl.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl_vector.html">anki_vector.opengl.opengl_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl_viewer.html">anki_vector.opengl.opengl_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.photos.html">anki_vector.photos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.proximity.html">anki_vector.proximity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.robot.html">anki_vector.robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.screen.html">anki_vector.screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.status.html">anki_vector.status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.touch.html">anki_vector.touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.user_intent.html">anki_vector.user_intent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.util.html">anki_vector.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.viewer.html">anki_vector.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.vision.html">anki_vector.vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.world.html">anki_vector.world</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" aria-label="top navigation">
+
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vector SDK</a>
+
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+        <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+
+          <li><a href="../api.html">The API</a> &raquo;</li>
+
+      <li>anki_vector.annotate</li>
+
+
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="../_sources/generated/anki_vector.annotate.rst.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+
+  </ul>
+
+
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="module-anki_vector.annotate">
+<span id="anki-vector-annotate"></span><h1>anki_vector.annotate<a class="headerlink" href="#module-anki_vector.annotate" title="Permalink to this headline">¶</a></h1>
+<p>Camera image annotation.</p>
+<img alt="../_images/annotate.png" src="../_images/annotate.png" />
+<p>This module defines an <a class="reference internal" href="#anki_vector.annotate.ImageAnnotator" title="anki_vector.annotate.ImageAnnotator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageAnnotator</span></code></a> class used by
+<a class="reference internal" href="anki_vector.camera.html#anki_vector.camera.CameraImage" title="anki_vector.camera.CameraImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.camera.CameraImage</span></code></a> and
+<a class="reference internal" href="anki_vector.camera.html#anki_vector.camera.CameraComponent" title="anki_vector.camera.CameraComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.camera.CameraComponent</span></code></a> to add annotations
+to camera images received by the robot.</p>
+<p>This can include the location of cubes and faces that the robot currently sees,
+along with user-defined custom annotations.</p>
+<p>The ImageAnnotator instance can be accessed as
+<a class="reference internal" href="anki_vector.camera.html#anki_vector.camera.CameraComponent.image_annotator" title="anki_vector.camera.CameraComponent.image_annotator"><code class="xref py py-attr docutils literal notranslate"><span class="pre">anki_vector.camera.CameraComponent.image_annotator</span></code></a>.</p>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-center">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.annotate.add_img_box_to_image" title="anki_vector.annotate.add_img_box_to_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_img_box_to_image</span></code></a>(draw, box, color[, text])</p></td>
+<td><p>Draw a box on an image and optionally add text.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#anki_vector.annotate.add_polygon_to_image" title="anki_vector.annotate.add_polygon_to_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_polygon_to_image</span></code></a>(draw, poly_points, …)</p></td>
+<td><p>Draw a polygon on an image</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.annotate.annotator" title="anki_vector.annotate.annotator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">annotator</span></code></a>(f)</p></td>
+<td><p>A decorator for converting a regular function/method into an Annotator.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-center">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.annotate.AnnotationPosition" title="anki_vector.annotate.AnnotationPosition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AnnotationPosition</span></code></a></p></td>
+<td><p>Specifies where the annotation must be rendered.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#anki_vector.annotate.Annotator" title="anki_vector.annotate.Annotator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Annotator</span></code></a>(img_annotator[, priority])</p></td>
+<td><p>Annotation base class</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.annotate.FaceAnnotator" title="anki_vector.annotate.FaceAnnotator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FaceAnnotator</span></code></a>(img_annotator[, box_color])</p></td>
+<td><p>Adds annotations of currently detected faces to a camera image.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#anki_vector.annotate.ImageAnnotator" title="anki_vector.annotate.ImageAnnotator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageAnnotator</span></code></a>(world, **kw)</p></td>
+<td><p>ImageAnnotator applies annotations to the camera image received from the robot.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.annotate.ImageText" title="anki_vector.annotate.ImageText"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageText</span></code></a>(text[, position, align, color, …])</p></td>
+<td><p>ImageText represents some text that can be applied to an image.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#anki_vector.annotate.ObjectAnnotator" title="anki_vector.annotate.ObjectAnnotator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ObjectAnnotator</span></code></a>(img_annotator[, object_colors])</p></td>
+<td><p>Adds object annotations to an Image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.annotate.TextAnnotator" title="anki_vector.annotate.TextAnnotator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextAnnotator</span></code></a>(img_annotator, text)</p></td>
+<td><p>Adds simple text annotations to a camera image.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="anki_vector.annotate.RESAMPLE_MODE_NEAREST">
+<code class="descclassname">anki_vector.annotate.</code><code class="descname">RESAMPLE_MODE_NEAREST</code><em class="property"> = 0</em><a class="headerlink" href="#anki_vector.annotate.RESAMPLE_MODE_NEAREST" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fastest resampling mode, use nearest pixel</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="anki_vector.annotate.RESAMPLE_MODE_BILINEAR">
+<code class="descclassname">anki_vector.annotate.</code><code class="descname">RESAMPLE_MODE_BILINEAR</code><em class="property"> = 2</em><a class="headerlink" href="#anki_vector.annotate.RESAMPLE_MODE_BILINEAR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slower, but smoother, resampling mode - linear interpolation from 2x2 grid of pixels</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.annotate.AnnotationPosition">
+<em class="property">class </em><code class="descclassname">anki_vector.annotate.</code><code class="descname">AnnotationPosition</code><a class="headerlink" href="#anki_vector.annotate.AnnotationPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies where the annotation must be rendered.</p>
+<dl class="attribute">
+<dt id="anki_vector.annotate.AnnotationPosition.BOTTOM_LEFT">
+<code class="descname">BOTTOM_LEFT</code><em class="property"> = 9</em><a class="headerlink" href="#anki_vector.annotate.AnnotationPosition.BOTTOM_LEFT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bottom left position</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.annotate.AnnotationPosition.BOTTOM_RIGHT">
+<code class="descname">BOTTOM_RIGHT</code><em class="property"> = 10</em><a class="headerlink" href="#anki_vector.annotate.AnnotationPosition.BOTTOM_RIGHT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bottom right position</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.annotate.AnnotationPosition.TOP_LEFT">
+<code class="descname">TOP_LEFT</code><em class="property"> = 5</em><a class="headerlink" href="#anki_vector.annotate.AnnotationPosition.TOP_LEFT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Top left position</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.annotate.AnnotationPosition.TOP_RIGHT">
+<code class="descname">TOP_RIGHT</code><em class="property"> = 6</em><a class="headerlink" href="#anki_vector.annotate.AnnotationPosition.TOP_RIGHT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Top right position</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.annotate.ImageText">
+<em class="property">class </em><code class="descclassname">anki_vector.annotate.</code><code class="descname">ImageText</code><span class="sig-paren">(</span><em>text</em>, <em>position=&lt;AnnotationPosition.BOTTOM_RIGHT: 10&gt;</em>, <em>align='left'</em>, <em>color='white'</em>, <em>font=None</em>, <em>line_spacing=3</em>, <em>outline_color=None</em>, <em>full_outline=True</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ImageText" title="Permalink to this definition">¶</a></dt>
+<dd><p>ImageText represents some text that can be applied to an image.</p>
+<p>The class allows the text to be placed at various positions inside a
+bounding box within the image itself.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageDraw</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;run `pip3 install --user Pillow numpy` to run this example&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="kn">from</span> <span class="nn">anki_vector</span> <span class="k">import</span> <span class="n">annotate</span>
+
+
+<span class="c1"># Define an annotator using the annotator decorator</span>
+<span class="nd">@annotate</span><span class="o">.</span><span class="n">annotator</span>
+<span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">annotator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">world</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">annotate</span><span class="o">.</span><span class="n">ImageText</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%m:%S&quot;</span><span class="p">),</span>
+                              <span class="n">position</span><span class="o">=</span><span class="n">annotate</span><span class="o">.</span><span class="n">AnnotationPosition</span><span class="o">.</span><span class="n">TOP_LEFT</span><span class="p">,</span>
+                              <span class="n">outline_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="n">text</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="n">show_viewer</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">enable_face_detection</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">enable_custom_object_detection</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">image_annotator</span><span class="o">.</span><span class="n">add_static_text</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;Vec-Cam&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">annotate</span><span class="o">.</span><span class="n">AnnotationPosition</span><span class="o">.</span><span class="n">TOP_RIGHT</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">image_annotator</span><span class="o">.</span><span class="n">add_annotator</span><span class="p">(</span><span class="s2">&quot;clock&quot;</span><span class="p">,</span> <span class="n">clock</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The text to display; may contain newlines</p></li>
+<li><p><strong>position</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Where on the screen to render the text
+- such as AnnotationPosition.TOP_LEFT or AnnotationPosition.BOTTOM_RIGHT</p></li>
+<li><p><strong>align</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Text alignment for multi-line strings</p></li>
+<li><p><strong>color</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Color to use for the text - see <a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/ImageColor.html#module-PIL.ImageColor" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">PIL.ImageColor</span></code></a></p></li>
+<li><p><strong>font</strong> – ImageFont to use (None for a default font)</p></li>
+<li><p><strong>line_spacing</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The vertical spacing for multi-line strings</p></li>
+<li><p><strong>outline_color</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Color to use for the outline - see
+<a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/ImageColor.html#module-PIL.ImageColor" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">PIL.ImageColor</span></code></a> - use None for no outline.</p></li>
+<li><p><strong>full_outline</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if the outline should surround the text,
+otherwise a cheaper drop-shadow is displayed. Only relevant if
+outline_color is specified.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="anki_vector.annotate.ImageText.render">
+<code class="descname">render</code><span class="sig-paren">(</span><em>draw</em>, <em>bounds</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ImageText.render" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the text onto an image within the specified bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>draw</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ImageDraw</span></code>) – The drawable surface to write on</p></li>
+<li><p><strong>top_left_y</strong><strong>, </strong><strong>bottom_right_x</strong><strong>, </strong><strong>bottom_right_y</strong><strong>)</strong> (<em>bounds</em><em>(</em><em>top_left_x</em><em>,</em>) – bounding box</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageDraw</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.annotate.Annotator">
+<em class="property">class </em><code class="descclassname">anki_vector.annotate.</code><code class="descname">Annotator</code><span class="sig-paren">(</span><em>img_annotator</em>, <em>priority=None</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.Annotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotation base class</p>
+<p>Subclasses of Annotator handle applying a single annotation to an image.</p>
+<dl class="method">
+<dt id="anki_vector.annotate.Annotator.apply">
+<code class="descname">apply</code><span class="sig-paren">(</span><em>image</em>, <em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.Annotator.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the annotation to the image.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.annotate.Annotator.enabled">
+<code class="descname">enabled</code><em class="property"> = None</em><a class="headerlink" href="#anki_vector.annotate.Annotator.enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set enabled to false to prevent the annotator being called</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.annotate.Annotator.img_annotator">
+<code class="descname">img_annotator</code><em class="property"> = None</em><a class="headerlink" href="#anki_vector.annotate.Annotator.img_annotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>The object managing camera annotations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#anki_vector.annotate.ImageAnnotator" title="anki_vector.annotate.ImageAnnotator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageAnnotator</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.annotate.Annotator.priority">
+<code class="descname">priority</code><em class="property"> = 100</em><a class="headerlink" href="#anki_vector.annotate.Annotator.priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>The priority of the annotator - Annotators with higher numbered
+priorities are applied first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.annotate.Annotator.world">
+<code class="descname">world</code><em class="property"> = None</em><a class="headerlink" href="#anki_vector.annotate.Annotator.world" title="Permalink to this definition">¶</a></dt>
+<dd><p>The world object for the robot who owns the camera</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.world.html#anki_vector.world.World" title="anki_vector.world.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">World</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.annotate.ObjectAnnotator">
+<em class="property">class </em><code class="descclassname">anki_vector.annotate.</code><code class="descname">ObjectAnnotator</code><span class="sig-paren">(</span><em>img_annotator</em>, <em>object_colors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ObjectAnnotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds object annotations to an Image.</p>
+<p>This handles <a class="reference internal" href="anki_vector.objects.html#anki_vector.objects.LightCube" title="anki_vector.objects.LightCube"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.objects.LightCube</span></code></a>,
+<a class="reference internal" href="anki_vector.objects.html#anki_vector.objects.Charger" title="anki_vector.objects.Charger"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.objects.Charger</span></code></a> and
+<a class="reference internal" href="anki_vector.objects.html#anki_vector.objects.CustomObject" title="anki_vector.objects.CustomObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.objects.CustomObject</span></code></a>.</p>
+<dl class="method">
+<dt id="anki_vector.annotate.ObjectAnnotator.apply">
+<code class="descname">apply</code><span class="sig-paren">(</span><em>image</em>, <em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ObjectAnnotator.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the annotation to the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.annotate.FaceAnnotator">
+<em class="property">class </em><code class="descclassname">anki_vector.annotate.</code><code class="descname">FaceAnnotator</code><span class="sig-paren">(</span><em>img_annotator</em>, <em>box_color=None</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.FaceAnnotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds annotations of currently detected faces to a camera image.</p>
+<p>This handles the display of <a class="reference internal" href="anki_vector.faces.html#anki_vector.faces.Face" title="anki_vector.faces.Face"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.faces.Face</span></code></a> objects.</p>
+<dl class="method">
+<dt id="anki_vector.annotate.FaceAnnotator.apply">
+<code class="descname">apply</code><span class="sig-paren">(</span><em>image</em>, <em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.FaceAnnotator.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the annotation to the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.annotate.TextAnnotator">
+<em class="property">class </em><code class="descclassname">anki_vector.annotate.</code><code class="descname">TextAnnotator</code><span class="sig-paren">(</span><em>img_annotator</em>, <em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.TextAnnotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds simple text annotations to a camera image.</p>
+<dl class="method">
+<dt id="anki_vector.annotate.TextAnnotator.apply">
+<code class="descname">apply</code><span class="sig-paren">(</span><em>image</em>, <em>scale</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.TextAnnotator.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the annotation to the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.annotate.ImageAnnotator">
+<em class="property">class </em><code class="descclassname">anki_vector.annotate.</code><code class="descname">ImageAnnotator</code><span class="sig-paren">(</span><em>world</em>, <em>**kw</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ImageAnnotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>ImageAnnotator applies annotations to the camera image received from the robot.</p>
+<p>This is instantiated by <a class="reference internal" href="anki_vector.world.html#anki_vector.world.World" title="anki_vector.world.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.world.World</span></code></a> and is accessible as
+<a class="reference internal" href="anki_vector.camera.html#anki_vector.camera.CameraComponent.image_annotator" title="anki_vector.camera.CameraComponent.image_annotator"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.camera.CameraComponent.image_annotator</span></code></a>.</p>
+<p>By default it defines two active annotators named <code class="docutils literal notranslate"><span class="pre">objects</span></code> and <code class="docutils literal notranslate"><span class="pre">faces</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">objects</span></code> annotator adds a box around each object (such as light cubes)
+that the robot can see.  The <code class="docutils literal notranslate"><span class="pre">faces</span></code> annotator adds a box around each person’s
+face that the robot can recognize.</p>
+<p>Custom annotations can be defined by calling <a class="reference internal" href="#anki_vector.annotate.ImageAnnotator.add_annotator" title="anki_vector.annotate.ImageAnnotator.add_annotator"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_annotator()</span></code></a> with
+a name of your choosing and an instance of a <a class="reference internal" href="#anki_vector.annotate.Annotator" title="anki_vector.annotate.Annotator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotator</span></code></a> subclass,
+or use a regular function wrapped with the <a class="reference internal" href="#anki_vector.annotate.annotator" title="anki_vector.annotate.annotator"><code class="xref py py-func docutils literal notranslate"><span class="pre">annotator()</span></code></a> decorator.</p>
+<p>Individual annotations can be disabled and re-enabled using the
+<a class="reference internal" href="#anki_vector.annotate.ImageAnnotator.disable_annotator" title="anki_vector.annotate.ImageAnnotator.disable_annotator"><code class="xref py py-meth docutils literal notranslate"><span class="pre">disable_annotator()</span></code></a> and <a class="reference internal" href="#anki_vector.annotate.ImageAnnotator.enable_annotator" title="anki_vector.annotate.ImageAnnotator.enable_annotator"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enable_annotator()</span></code></a> methods.</p>
+<p>All annotations can be disabled by setting the
+<a class="reference internal" href="#anki_vector.annotate.ImageAnnotator.annotation_enabled" title="anki_vector.annotate.ImageAnnotator.annotation_enabled"><code class="xref py py-attr docutils literal notranslate"><span class="pre">annotation_enabled</span></code></a> property to False.</p>
+<p>E.g. to disable face annotations, call
+<code class="docutils literal notranslate"><span class="pre">robot.camera.image_annotator.disable_annotator('faces')</span></code></p>
+<p>Annotators each have a priority number associated with them. Annotators
+with a larger priority number are rendered first and may be overdrawn by those
+with a lower/smaller priority number.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageDraw</span>
+
+<span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="kn">from</span> <span class="nn">anki_vector</span> <span class="k">import</span> <span class="n">annotate</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="nd">@annotate</span><span class="o">.</span><span class="n">annotator</span>
+<span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">annotator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">world</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">annotate</span><span class="o">.</span><span class="n">ImageText</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%m:%S&quot;</span><span class="p">),</span>
+                              <span class="n">position</span><span class="o">=</span><span class="n">annotate</span><span class="o">.</span><span class="n">AnnotationPosition</span><span class="o">.</span><span class="n">TOP_LEFT</span><span class="p">,</span>
+                              <span class="n">outline_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="n">text</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="n">show_viewer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="c1"># Add a custom annotator to the camera feed</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">image_annotator</span><span class="o">.</span><span class="n">add_annotator</span><span class="p">(</span><span class="s2">&quot;custom-annotator&quot;</span><span class="p">,</span> <span class="n">clock</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="c1"># Disable the custom annotator</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">image_annotator</span><span class="o">.</span><span class="n">disable_annotator</span><span class="p">(</span><span class="s2">&quot;custom-annotator&quot;</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="anki_vector.annotate.ImageAnnotator.add_annotator">
+<code class="descname">add_annotator</code><span class="sig-paren">(</span><em>name</em>, <em>new_annotator</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ImageAnnotator.add_annotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new annotator for display.</p>
+<p>Annotators are enabled by default.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – An arbitrary name for the annotator; must not
+already be defined</p></li>
+<li><p><strong>new_annotator</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Union" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#anki_vector.annotate.Annotator" title="anki_vector.annotate.Annotator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotator</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Callable" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[…, <a class="reference internal" href="#anki_vector.annotate.Annotator" title="anki_vector.annotate.Annotator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotator</span></code></a>]]) – The annotator to add may either by an instance of Annotator,
+or a factory callable that will return an instance of Annotator.
+The callable will be called with an ImageAnnotator instance as its first argument.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.6/library/exceptions.html#ValueError" title="(in Python v3.6)"><strong>ValueError</strong></a> – </p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.annotate.ImageAnnotator.add_static_text">
+<code class="descname">add_static_text</code><span class="sig-paren">(</span><em>name</em>, <em>text</em>, <em>color='white'</em>, <em>position=&lt;AnnotationPosition.TOP_LEFT: 5&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ImageAnnotator.add_static_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add some static text to annotated images.</p>
+<p>This is a convenience method to create a <code class="xref py py-class docutils literal notranslate"><span class="pre">TextAnnnotator</span></code>
+and add it to the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – An arbitrary name for the annotator; must not
+already be defined</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Union" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="#anki_vector.annotate.ImageText" title="anki_vector.annotate.ImageText"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageText</span></code></a>]) – The text to display
+may be a plain string, or an ImageText instance</p></li>
+<li><p><strong>color</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Used if text is a string; defaults to white</p></li>
+<li><p><strong>position</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Used if text is a string; defaults to TOP_LEFT</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.annotate.ImageAnnotator.annotate_image">
+<code class="descname">annotate_image</code><span class="sig-paren">(</span><em>image</em>, <em>scale=None</em>, <em>fit_size=None</em>, <em>resample_mode=0</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ImageAnnotator.annotate_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by <a class="reference internal" href="anki_vector.camera.html#anki_vector.camera.CameraComponent" title="anki_vector.camera.CameraComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraComponent</span></code></a> to annotate camera images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></a>) – The image to annotate</p></li>
+<li><p><strong>scale</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]) – If set then the base image will be scaled by the
+supplied multiplier.  Cannot be combined with fit_size</p></li>
+<li><p><strong>fit_size</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]) – If set, then scale the image to fit inside
+the supplied (width, height) dimensions. The original aspect
+ratio will be preserved.  Cannot be combined with scale.</p></li>
+<li><p><strong>resample_mode</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The resampling mode to use when scaling the
+image. Should be either <a class="reference internal" href="#anki_vector.annotate.RESAMPLE_MODE_NEAREST" title="anki_vector.annotate.RESAMPLE_MODE_NEAREST"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RESAMPLE_MODE_NEAREST</span></code></a> (fast) or
+<a class="reference internal" href="#anki_vector.annotate.RESAMPLE_MODE_BILINEAR" title="anki_vector.annotate.RESAMPLE_MODE_BILINEAR"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RESAMPLE_MODE_BILINEAR</span></code></a> (slower, but smoother).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.annotate.ImageAnnotator.annotation_enabled">
+<code class="descname">annotation_enabled</code><em class="property"> = None</em><a class="headerlink" href="#anki_vector.annotate.ImageAnnotator.annotation_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this attribute is set to false, the <a class="reference internal" href="#anki_vector.annotate.ImageAnnotator.annotate_image" title="anki_vector.annotate.ImageAnnotator.annotate_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">annotate_image()</span></code></a> method
+will continue to provide a scaled image, but will not apply any annotations.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.annotate.ImageAnnotator.disable_annotator">
+<code class="descname">disable_annotator</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ImageAnnotator.disable_annotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable a named annotator.</p>
+<p>Leaves the annotator as registered, but does not include its output
+in the annotated image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of the annotator to disable</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.annotate.ImageAnnotator.enable_annotator">
+<code class="descname">enable_annotator</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ImageAnnotator.enable_annotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enabled a named annotator.</p>
+<p>(re)enable an annotator if it was previously disabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of the annotator to enable</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.annotate.ImageAnnotator.get_annotator">
+<code class="descname">get_annotator</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ImageAnnotator.get_annotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a named annotator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of the annotator to return</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>KeyError if the annotator isn't registered</strong> – </p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.annotate.ImageAnnotator.remove_annotator">
+<code class="descname">remove_annotator</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.ImageAnnotator.remove_annotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove an annotator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of the annotator to remove as passed to <a class="reference internal" href="#anki_vector.annotate.ImageAnnotator.add_annotator" title="anki_vector.annotate.ImageAnnotator.add_annotator"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_annotator()</span></code></a>.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>KeyError if the annotator isn't registered</strong> – </p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.annotate.ImageAnnotator.world">
+<code class="descname">world</code><em class="property"> = None</em><a class="headerlink" href="#anki_vector.annotate.ImageAnnotator.world" title="Permalink to this definition">¶</a></dt>
+<dd><p>World object that created the annotator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.world.html#anki_vector.world.World" title="anki_vector.world.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.world.World</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="anki_vector.annotate.add_img_box_to_image">
+<code class="descclassname">anki_vector.annotate.</code><code class="descname">add_img_box_to_image</code><span class="sig-paren">(</span><em>draw</em>, <em>box</em>, <em>color</em>, <em>text=None</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.add_img_box_to_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a box on an image and optionally add text.</p>
+<p>This will draw the outline of a rectangle to the passed in image
+in the specified color and optionally add one or more pieces of text
+along the inside edge of the rectangle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>draw</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ImageDraw</span></code>) – The drawable surface to write on</p></li>
+<li><p><strong>box</strong> (<a class="reference internal" href="anki_vector.util.html#anki_vector.util.ImageRect" title="anki_vector.util.ImageRect"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageRect</span></code></a>) – The ImageBox defining the rectangle to draw</p></li>
+<li><p><strong>color</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A color string suitable for use with PIL - see <a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/ImageColor.html#module-PIL.ImageColor" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">PIL.ImageColor</span></code></a></p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Union" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#anki_vector.annotate.ImageText" title="anki_vector.annotate.ImageText"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageText</span></code></a>, <a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Iterable" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference internal" href="#anki_vector.annotate.ImageText" title="anki_vector.annotate.ImageText"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageText</span></code></a>], <code class="docutils literal notranslate"><span class="pre">None</span></code>]) – The text to display - may be a single ImageText instance,
+or any iterable (eg a list of ImageText instances) to display multiple pieces of text.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="anki_vector.annotate.add_polygon_to_image">
+<code class="descclassname">anki_vector.annotate.</code><code class="descname">add_polygon_to_image</code><span class="sig-paren">(</span><em>draw</em>, <em>poly_points</em>, <em>scale</em>, <em>line_color</em>, <em>fill_color=None</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.add_polygon_to_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a polygon on an image</p>
+<p>This will draw a polygon on the passed-in image in the specified
+colors and scale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>draw</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ImageDraw</span></code>) – The drawable surface to write on</p></li>
+<li><p><strong>poly_points</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – A sequence of points representing the polygon,
+where each point has float members (x, y)</p></li>
+<li><p><strong>scale</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Scale to multiply each point to match the image scaling</p></li>
+<li><p><strong>line_color</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The color for the outline of the polygon. The string value
+must be a color string suitable for use with PIL - see <a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/ImageColor.html#module-PIL.ImageColor" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">PIL.ImageColor</span></code></a></p></li>
+<li><p><strong>fill_color</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – The color for the inside of the polygon. The string value
+must be a color string suitable for use with PIL - see <a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/ImageColor.html#module-PIL.ImageColor" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">PIL.ImageColor</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="anki_vector.annotate.annotator">
+<code class="descclassname">anki_vector.annotate.</code><code class="descname">annotator</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.annotate.annotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator for converting a regular function/method into an Annotator.</p>
+<p>The wrapped function should have a signature of
+<code class="docutils literal notranslate"><span class="pre">(image,</span> <span class="pre">scale,</span> <span class="pre">img_annotator=None,</span> <span class="pre">world=None,</span> <span class="pre">**kw)</span></code></p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="anki_vector.audio.html" class="btn btn-neutral float-right" title="anki_vector.audio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+        <a href="anki_vector.animation.html" class="btn btn-neutral float-left" title="anki_vector.animation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anki
+      <span class="lastupdated">
+        Last updated on Apr, 30, 2019 10:42:16 Coordinated Universal Time.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,455 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>The API &mdash; Vector SDK 0.6.0 documentation</title>
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+
+
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="anki_vector" href="generated/anki_vector.html" />
+    <link rel="prev" title="Getting Started With the Vector SDK" href="getstarted.html" />
+  <script>
+    /**
+     * Developer.anki.com Iframe Integration
+     */
+    (function(window) {
+      // Only apply if we're embedded
+      var parent = window.top;
+      if (parent === window || !parent || !parent.postMessage) {
+        return;
+      }
+
+      // For styling necessary only when embedded in an iframe.
+      function addEmbededClass() {
+        document.body.classList.add("embedded");
+      }
+
+      // Change document base to that of Developer.anki.com so that navigation happens at the top level.
+      function updateDocumentBase() {
+        var base = document.createElement('base');
+        base.target='_parent';
+        base.href= document.referrer;
+        var head = document.getElementsByTagName('head')[0];
+        var firstChild = head.firstChild;
+        head.insertBefore(base, firstChild);
+      }
+
+      // Signal to Developer.anki.com that we're done loading and ready to receive messages.
+      // We send page title to Developer.anki.com so that the browser displays it.
+      function notifyParentWindowOnLoad() {
+        parent.postMessage({
+          event: 'load',
+          docTitle: document.title
+        }, '*');
+      }
+
+      function initEmbeddedMode() {
+        addEmbededClass();
+        updateDocumentBase();
+        notifyParentWindowOnLoad();
+      }
+
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', function(){
+          initEmbeddedMode();
+        });
+      } else {
+        initEmbeddedMode();
+      }
+
+      // Handle messages from Developer.anki.com.
+      function receiveMessage(event) {
+        var eventName = event.data.event;
+        if(eventName === 'hashchange') {
+          window.location.hash = event.data.hash;
+          // Workaround for IOS Safari lack of support for window.location.hash scrolling.
+          var linkedElement = document.getElementById(event.data.hash.replace('#', ''))
+          if (linkedElement && linkedElement.scrollIntoView) {
+            linkedElement.scrollIntoView();
+          }
+        }
+      }
+      window.addEventListener("message", receiveMessage, false);
+
+    })(window);
+  </script>
+  <style>
+    /* Allows scrolling to anchor links on IOS Safari */
+    .embedded .wy-grid-for-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+  </style>
+  <!-- <script async src='https://www.google-analytics.com/analytics.js'></script> -->
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+
+  <div class="wy-grid-for-nav">
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+            <a href="index.html" class="icon icon-home"> Vector SDK
+
+
+
+          </a>
+
+
+
+
+              <div class="version">
+                0.6.0
+              </div>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+              <p class="caption"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-macos.html">Installation - macOS / OS X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-windows.html">Installation - Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-linux.html">Installation - Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-tips.html">Advanced Tips</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Downloads</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloads</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getstarted.html">Getting Started With the Vector SDK</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.html">anki_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.animation.html">anki_vector.animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.annotate.html">anki_vector.annotate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.audio.html">anki_vector.audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.behavior.html">anki_vector.behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.camera.html">anki_vector.camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.camera_viewer.html">anki_vector.camera_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.color.html">anki_vector.color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.connection.html">anki_vector.connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.events.html">anki_vector.events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.exceptions.html">anki_vector.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.faces.html">anki_vector.faces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.lights.html">anki_vector.lights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.mdns.html">anki_vector.mdns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.messaging.html">anki_vector.messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.motors.html">anki_vector.motors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.nav_map.html">anki_vector.nav_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.objects.html">anki_vector.objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.opengl.html">anki_vector.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.opengl.opengl.html">anki_vector.opengl.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.opengl.opengl_vector.html">anki_vector.opengl.opengl_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.opengl.opengl_viewer.html">anki_vector.opengl.opengl_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.photos.html">anki_vector.photos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.proximity.html">anki_vector.proximity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.robot.html">anki_vector.robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.screen.html">anki_vector.screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.status.html">anki_vector.status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.touch.html">anki_vector.touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.user_intent.html">anki_vector.user_intent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.util.html">anki_vector.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.viewer.html">anki_vector.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.vision.html">anki_vector.vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.world.html">anki_vector.world</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" aria-label="top navigation">
+
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vector SDK</a>
+
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+        <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+
+      <li><a href="index.html">Docs</a> &raquo;</li>
+
+      <li>The API</li>
+
+
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+
+  </ul>
+
+
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="the-api">
+<h1>The API<a class="headerlink" href="#the-api" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-center">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.html#module-anki_vector" title="anki_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector</span></code></a></p></td>
+<td><p>SDK for programming with the Anki Vector robot.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.animation.html#module-anki_vector.animation" title="anki_vector.animation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.animation</span></code></a></p></td>
+<td><p>Animation related classes, functions, events and values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.annotate.html#module-anki_vector.annotate" title="anki_vector.annotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.annotate</span></code></a></p></td>
+<td><p>Camera image annotation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.audio.html#module-anki_vector.audio" title="anki_vector.audio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.audio</span></code></a></p></td>
+<td><p>Support for accessing Vector’s audio.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.behavior.html#module-anki_vector.behavior" title="anki_vector.behavior"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.behavior</span></code></a></p></td>
+<td><p><span class="target" id="behavior"></span></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.camera.html#module-anki_vector.camera" title="anki_vector.camera"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.camera</span></code></a></p></td>
+<td><p>Support for Vector’s camera.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.camera_viewer.html#module-anki_vector.camera_viewer" title="anki_vector.camera_viewer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.camera_viewer</span></code></a></p></td>
+<td><p>This module provides the camera viewer’s render process.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.color.html#module-anki_vector.color" title="anki_vector.color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.color</span></code></a></p></td>
+<td><p>Colors to be used with a light or Vector’s screen.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.connection.html#module-anki_vector.connection" title="anki_vector.connection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.connection</span></code></a></p></td>
+<td><p>Management of the connection to and from Vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.events.html#module-anki_vector.events" title="anki_vector.events"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.events</span></code></a></p></td>
+<td><p>Event handler used to make functions subscribe to robot events.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.exceptions.html#module-anki_vector.exceptions" title="anki_vector.exceptions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.exceptions</span></code></a></p></td>
+<td><p>SDK-specific exception classes for Vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.faces.html#module-anki_vector.faces" title="anki_vector.faces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.faces</span></code></a></p></td>
+<td><p>Face recognition and enrollment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.lights.html#module-anki_vector.lights" title="anki_vector.lights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.lights</span></code></a></p></td>
+<td><p>Helper routines for dealing with Vector’s Cube lights and colors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.mdns.html#module-anki_vector.mdns" title="anki_vector.mdns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.mdns</span></code></a></p></td>
+<td><p>This contains the <code class="xref py py-class docutils literal notranslate"><span class="pre">VectorMdns</span></code> class for discovering Vector (without already knowing the IP address) on a LAN (Local Area Network) over mDNS.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.messaging.html#module-anki_vector.messaging" title="anki_vector.messaging"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.messaging</span></code></a></p></td>
+<td><p>Protobuf and gRPC messages exposed to the Vector Python SDK.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.motors.html#module-anki_vector.motors" title="anki_vector.motors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.motors</span></code></a></p></td>
+<td><p>Control the motors of Vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.nav_map.html#module-anki_vector.nav_map" title="anki_vector.nav_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.nav_map</span></code></a></p></td>
+<td><p>A 2D navigation memory map of the world around Vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.objects.html#module-anki_vector.objects" title="anki_vector.objects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.objects</span></code></a></p></td>
+<td><p>Object and Light Cube recognition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.opengl.html#module-anki_vector.opengl" title="anki_vector.opengl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.opengl</span></code></a></p></td>
+<td><p>This module provides 3D classes for running the OpenGL Viewer.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.opengl.opengl.html#module-anki_vector.opengl.opengl" title="anki_vector.opengl.opengl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.opengl.opengl</span></code></a></p></td>
+<td><p>This module provides 3D support classes for OpenGL, used by opengl_viewer.py.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.opengl.opengl_vector.html#module-anki_vector.opengl.opengl_vector" title="anki_vector.opengl.opengl_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.opengl.opengl_vector</span></code></a></p></td>
+<td><p>This module provides Vector-specific 3D support classes for OpenGL, used by opengl_viewer.py.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.opengl.opengl_viewer.html#module-anki_vector.opengl.opengl_viewer" title="anki_vector.opengl.opengl_viewer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.opengl.opengl_viewer</span></code></a></p></td>
+<td><p>This module provides a 3D visualizer for Vector’s world state and a 2D camera window.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.photos.html#module-anki_vector.photos" title="anki_vector.photos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.photos</span></code></a></p></td>
+<td><p>Photo related classes, functions, events and values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.proximity.html#module-anki_vector.proximity" title="anki_vector.proximity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.proximity</span></code></a></p></td>
+<td><p>Support for Vector’s distance sensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.robot.html#module-anki_vector.robot" title="anki_vector.robot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.robot</span></code></a></p></td>
+<td><p>This contains the <code class="xref py py-class docutils literal notranslate"><span class="pre">Robot</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncRobot</span></code> classes for managing Vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.screen.html#module-anki_vector.screen" title="anki_vector.screen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.screen</span></code></a></p></td>
+<td><p>Vector’s LCD Screen that displays his face.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.status.html#module-anki_vector.status" title="anki_vector.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.status</span></code></a></p></td>
+<td><p><span class="target" id="status"></span></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.touch.html#module-anki_vector.touch" title="anki_vector.touch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.touch</span></code></a></p></td>
+<td><p>Support for Vector’s touch sensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.user_intent.html#module-anki_vector.user_intent" title="anki_vector.user_intent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.user_intent</span></code></a></p></td>
+<td><p>Class and enumeration related to voice commands received by Vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.util.html#module-anki_vector.util" title="anki_vector.util"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.util</span></code></a></p></td>
+<td><p>Utility functions and classes for the Vector SDK.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.viewer.html#module-anki_vector.viewer" title="anki_vector.viewer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.viewer</span></code></a></p></td>
+<td><p>Displays camera feed from Vector’s camera.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/anki_vector.vision.html#module-anki_vector.vision" title="anki_vector.vision"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.vision</span></code></a></p></td>
+<td><p>Utility methods for Vector’s vision</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/anki_vector.world.html#module-anki_vector.world" title="anki_vector.world"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anki_vector.world</span></code></a></p></td>
+<td><p>Vector’s known view of his world.</p></td>
+</tr>
+</tbody>
+</table>
+<p>For documentation about protobuf objects, please see <a class="reference internal" href="proto.html"><span class="doc">the protobuf documentation</span></a>.</p>
+<hr class="docutils" />
+<p><a class="reference external" href="https://www.anki.com/en-us/company/terms-and-conditions">Terms and Conditions</a> and <a class="reference external" href="https://www.anki.com/en-us/company/privacy">Privacy Policy</a></p>
+<p><a class="reference external" href="https://developer.anki.com">Click here to return to the Anki Developer website.</a></p>
+</div>
+
+
+           </div>
+
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="generated/anki_vector.html" class="btn btn-neutral float-right" title="anki_vector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+        <a href="getstarted.html" class="btn btn-neutral float-left" title="Getting Started With the Vector SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anki
+      <span class="lastupdated">
+        Last updated on Apr, 30, 2019 10:42:16 Coordinated Universal Time.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+
+
+
+
+
+</body>
+</html>

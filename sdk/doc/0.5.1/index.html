@@ -1,0 +1,417 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Welcome to the Vector SDK Alpha &mdash; Vector SDK 0.1 documentation</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Initial Setup" href="initial.html" />
+  <script>
+    /**
+     * Developer.anki.com Iframe Integration
+     */
+    (function(window) {
+      // Only apply if we're embedded
+      var parent = window.top;
+      if (parent === window || !parent || !parent.postMessage) {
+        return;
+      }
+
+      // For styling necessary only when embedded in an iframe.
+      function addEmbededClass() {
+        document.body.classList.add("embedded");
+      }
+
+      // Change document base to that of Developer.anki.com so that navigation happens at the top level.
+      function updateDocumentBase() {
+        var base = document.createElement('base');
+        base.target='_parent';
+        base.href= document.referrer;
+        var head = document.getElementsByTagName('head')[0];
+        var firstChild = head.firstChild;
+        head.insertBefore(base, firstChild);
+      }
+
+      // Signal to Developer.anki.com that we're done loading and ready to receive messages.
+      // We send page title to Developer.anki.com so that the browser displays it.
+      function notifyParentWindowOnLoad() {
+        parent.postMessage({
+          event: 'load',
+          docTitle: document.title
+        }, '*');
+      }
+
+      function initEmbeddedMode() {
+        addEmbededClass();
+        updateDocumentBase();
+        notifyParentWindowOnLoad();
+      }
+
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', function(){
+          initEmbeddedMode();
+        });
+      } else {
+        initEmbeddedMode();
+      }
+
+      // Handle messages from Developer.anki.com.
+      function receiveMessage(event) {
+        var eventName = event.data.event;
+        if(eventName === 'hashchange') {
+          window.location.hash = event.data.hash;
+          // Workaround for IOS Safari lack of support for window.location.hash scrolling.
+          var linkedElement = document.getElementById(event.data.hash.replace('#', ''))
+          if (linkedElement && linkedElement.scrollIntoView) {
+            linkedElement.scrollIntoView();
+          }
+        }
+      }
+      window.addEventListener("message", receiveMessage, false);
+
+    })(window);
+
+    /**
+     * Google Analytics
+     * @TODO: enable google analytics
+     */
+    // if (window.location.hostname.toLowerCase() == 'cozmosdk.anki.com') {
+    //     window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    //     ga('create', 'UA-40941061-1', 'auto');
+    //     ga('send', 'pageview');
+    // }
+
+  </script>
+  <style>
+    /* Allows scrolling to anchor links on IOS Safari */
+    .embedded .wy-grid-for-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+  </style>
+  <!-- <script async src='https://www.google-analytics.com/analytics.js'></script> -->
+
+
+
+
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+
+  <div class="wy-grid-for-nav">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+
+
+
+            <a href="#" class="icon icon-home"> Vector SDK
+
+
+
+          </a>
+
+
+
+
+              <div class="version">
+                0.5.1
+              </div>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+              <p class="caption"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-macos.html">Installation - macOS / OS X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-windows.html">Installation - Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-linux.html">Installation - Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-tips.html">Advanced Tips</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Downloads</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloads</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getstarted.html">Getting Started With the Vector SDK</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">The API</a></li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" aria-label="top navigation">
+
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Vector SDK</a>
+
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+        <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+
+      <li><a href="#">Docs</a> &raquo;</li>
+
+      <li>Welcome to the Vector SDK Alpha</li>
+
+
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+
+  </ul>
+
+
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <img alt="_images/vector-sdk-alpha.jpg" src="_images/vector-sdk-alpha.jpg" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="welcome-to-the-vector-sdk-alpha">
+<h1>Welcome to the Vector SDK Alpha<a class="headerlink" href="#welcome-to-the-vector-sdk-alpha" title="Permalink to this headline">¶</a></h1>
+<p>The Vector SDK gives you direct access to Vector’s unprecedented set of advanced sensors, AI capabilities, and robotics technologies including computer vision, intelligent mapping and navigation, and a groundbreaking collection of expressive animations.</p>
+<p>It’s powerful but easy to use, complex but not complicated, and versatile enough to be used across a wide range of domains including enterprise, research, and entertainment.</p>
+<p>Please note this is an alpha version of the Vector SDK that is not yet feature complete, but already provides access to many of Vector’s hardware and software features. Please visit the official <a class="reference external" href="https://forums.anki.com/">Anki Developer Forums</a> for more details.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-macos.html">Installation - macOS / OS X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-windows.html">Installation - Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-linux.html">Installation - Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-tips.html">Advanced Tips</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Downloads</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="downloads.html#sdk-examples">SDK Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="downloads.html#github">GitHub</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getstarted.html">Getting Started With the Vector SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getstarted.html#anki-developer-forums">Anki Developer Forums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstarted.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstarted.html#starting-up-the-sdk">Starting Up the SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstarted.html#example-program">Example Program</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">The API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.html">anki_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.animation.html">anki_vector.animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.audio.html">anki_vector.audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.behavior.html">anki_vector.behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.camera.html">anki_vector.camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.color.html">anki_vector.color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.connection.html">anki_vector.connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.events.html">anki_vector.events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.exceptions.html">anki_vector.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.faces.html">anki_vector.faces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.lights.html">anki_vector.lights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.motors.html">anki_vector.motors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.nav_map.html">anki_vector.nav_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.objects.html">anki_vector.objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.opengl.html">anki_vector.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.opengl.opengl.html">anki_vector.opengl.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.opengl.opengl_vector.html">anki_vector.opengl.opengl_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.opengl.opengl_viewer.html">anki_vector.opengl.opengl_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.photos.html">anki_vector.photos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.proximity.html">anki_vector.proximity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.robot.html">anki_vector.robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.screen.html">anki_vector.screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.status.html">anki_vector.status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.touch.html">anki_vector.touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.util.html">anki_vector.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.viewer.html">anki_vector.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.vision.html">anki_vector.vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.world.html">anki_vector.world</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/anki_vector.messaging.client.html">anki_vector.messaging.client</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+<hr class="docutils" />
+<p><a class="reference external" href="https://www.anki.com/en-us/company/terms-and-conditions">Terms and Conditions</a> and <a class="reference external" href="https://www.anki.com/en-us/company/privacy">Privacy Policy</a></p>
+<p><a class="reference external" href="https://developer.anki.com">Click here to return to the Anki Developer website.</a></p>
+</div>
+</div>
+
+
+           </div>
+
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="initial.html" class="btn btn-neutral float-right" title="Initial Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anki.
+      Last updated on Dec, 13, 2018 03:57:29 Coordinated Universal Time.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+</body>
+</html>

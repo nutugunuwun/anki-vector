@@ -1,0 +1,27 @@
+anki\_vector.faces
+==================
+
+.. automodule:: anki_vector.faces
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      EvtFaceAppeared
+      EvtFaceDisappeared
+      EvtFaceObserved
+      Expression
+      Face
+      FaceComponent
+   
+   
+
+   
+   
+   

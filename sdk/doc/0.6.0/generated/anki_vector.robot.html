@@ -1,0 +1,1197 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>anki_vector.robot &mdash; Vector SDK 0.6.0 documentation</title>
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+
+
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="anki_vector.screen" href="anki_vector.screen.html" />
+    <link rel="prev" title="anki_vector.proximity" href="anki_vector.proximity.html" />
+  <script>
+    /**
+     * Developer.anki.com Iframe Integration
+     */
+    (function(window) {
+      // Only apply if we're embedded
+      var parent = window.top;
+      if (parent === window || !parent || !parent.postMessage) {
+        return;
+      }
+
+      // For styling necessary only when embedded in an iframe.
+      function addEmbededClass() {
+        document.body.classList.add("embedded");
+      }
+
+      // Change document base to that of Developer.anki.com so that navigation happens at the top level.
+      function updateDocumentBase() {
+        var base = document.createElement('base');
+        base.target='_parent';
+        base.href= document.referrer;
+        var head = document.getElementsByTagName('head')[0];
+        var firstChild = head.firstChild;
+        head.insertBefore(base, firstChild);
+      }
+
+      // Signal to Developer.anki.com that we're done loading and ready to receive messages.
+      // We send page title to Developer.anki.com so that the browser displays it.
+      function notifyParentWindowOnLoad() {
+        parent.postMessage({
+          event: 'load',
+          docTitle: document.title
+        }, '*');
+      }
+
+      function initEmbeddedMode() {
+        addEmbededClass();
+        updateDocumentBase();
+        notifyParentWindowOnLoad();
+      }
+
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', function(){
+          initEmbeddedMode();
+        });
+      } else {
+        initEmbeddedMode();
+      }
+
+      // Handle messages from Developer.anki.com.
+      function receiveMessage(event) {
+        var eventName = event.data.event;
+        if(eventName === 'hashchange') {
+          window.location.hash = event.data.hash;
+          // Workaround for IOS Safari lack of support for window.location.hash scrolling.
+          var linkedElement = document.getElementById(event.data.hash.replace('#', ''))
+          if (linkedElement && linkedElement.scrollIntoView) {
+            linkedElement.scrollIntoView();
+          }
+        }
+      }
+      window.addEventListener("message", receiveMessage, false);
+
+    })(window);
+  </script>
+  <style>
+    /* Allows scrolling to anchor links on IOS Safari */
+    .embedded .wy-grid-for-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+  </style>
+  <!-- <script async src='https://www.google-analytics.com/analytics.js'></script> -->
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+
+  <div class="wy-grid-for-nav">
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+            <a href="../index.html" class="icon icon-home"> Vector SDK
+
+
+
+          </a>
+
+
+
+
+              <div class="version">
+                0.6.0
+              </div>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+              <p class="caption"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../initial.html">Initial Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-macos.html">Installation - macOS / OS X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-windows.html">Installation - Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-linux.html">Installation - Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced-tips.html">Advanced Tips</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Downloads</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getstarted.html">Getting Started With the Vector SDK</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">The API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.html">anki_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.animation.html">anki_vector.animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.annotate.html">anki_vector.annotate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.audio.html">anki_vector.audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.behavior.html">anki_vector.behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.camera.html">anki_vector.camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.camera_viewer.html">anki_vector.camera_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.color.html">anki_vector.color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.connection.html">anki_vector.connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.events.html">anki_vector.events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.exceptions.html">anki_vector.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.faces.html">anki_vector.faces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.lights.html">anki_vector.lights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.mdns.html">anki_vector.mdns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.messaging.html">anki_vector.messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.motors.html">anki_vector.motors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.nav_map.html">anki_vector.nav_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.objects.html">anki_vector.objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.html">anki_vector.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl.html">anki_vector.opengl.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl_vector.html">anki_vector.opengl.opengl_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl_viewer.html">anki_vector.opengl.opengl_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.photos.html">anki_vector.photos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.proximity.html">anki_vector.proximity</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">anki_vector.robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.screen.html">anki_vector.screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.status.html">anki_vector.status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.touch.html">anki_vector.touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.user_intent.html">anki_vector.user_intent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.util.html">anki_vector.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.viewer.html">anki_vector.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.vision.html">anki_vector.vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.world.html">anki_vector.world</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" aria-label="top navigation">
+
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vector SDK</a>
+
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+        <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+
+          <li><a href="../api.html">The API</a> &raquo;</li>
+
+      <li>anki_vector.robot</li>
+
+
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="../_sources/generated/anki_vector.robot.rst.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+
+  </ul>
+
+
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="module-anki_vector.robot">
+<span id="anki-vector-robot"></span><h1>anki_vector.robot<a class="headerlink" href="#module-anki_vector.robot" title="Permalink to this headline">¶</a></h1>
+<p>This contains the <a class="reference internal" href="#anki_vector.robot.Robot" title="anki_vector.robot.Robot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Robot</span></code></a> and <a class="reference internal" href="#anki_vector.robot.AsyncRobot" title="anki_vector.robot.AsyncRobot"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncRobot</span></code></a> classes for managing Vector.</p>
+<p><a class="reference internal" href="#anki_vector.robot.Robot" title="anki_vector.robot.Robot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Robot</span></code></a> will run all behaviors in sequence and directly return the results.</p>
+<p><a class="reference internal" href="#anki_vector.robot.AsyncRobot" title="anki_vector.robot.AsyncRobot"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncRobot</span></code></a> will instead provide a <a class="reference external" href="https://docs.python.org/3.6/library/concurrent.futures.html#concurrent.futures.Future" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a> which the
+caller may use to obtain the result when they desire.</p>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-center">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.robot.AsyncRobot" title="anki_vector.robot.AsyncRobot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AsyncRobot</span></code></a>([serial, ip, name, config, …])</p></td>
+<td><p>The AsyncRobot object is just like the Robot object, but allows multiple commands to be executed at the same time.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#anki_vector.robot.Robot" title="anki_vector.robot.Robot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Robot</span></code></a>([serial, ip, name, config, …])</p></td>
+<td><p>The Robot object is responsible for managing the state and connections to a Vector, and is typically the entry-point to running the sdk.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="anki_vector.robot.Robot">
+<em class="property">class </em><code class="descclassname">anki_vector.robot.</code><code class="descname">Robot</code><span class="sig-paren">(</span><em>serial=None</em>, <em>ip=None</em>, <em>name=None</em>, <em>config=None</em>, <em>default_logging=True</em>, <em>behavior_activation_timeout=10</em>, <em>cache_animation_lists=True</em>, <em>enable_face_detection=False</em>, <em>estimate_facial_expression=False</em>, <em>enable_audio_feed=False</em>, <em>enable_custom_object_detection=False</em>, <em>enable_nav_map_feed=None</em>, <em>show_viewer=False</em>, <em>show_3d_viewer=False</em>, <em>behavior_control_level=&lt;ControlPriorityLevel.DEFAULT_PRIORITY: 20&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.robot.Robot" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Robot object is responsible for managing the state and connections
+to a Vector, and is typically the entry-point to running the sdk.</p>
+<p>The majority of the robot will not work until it is properly connected
+to Vector. There are two ways to get connected:</p>
+<p>1. Using <code class="code docutils literal notranslate"><span class="pre">with</span></code>: it works just like opening a file, and will close when
+the <code class="code docutils literal notranslate"><span class="pre">with</span></code> block’s indentation ends.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="c1"># Create the robot connection</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="c1"># Run your commands</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">play_animation_trigger</span><span class="p">(</span><span class="s2">&quot;GreetAfterLongTime&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>2. Using <a class="reference internal" href="#anki_vector.robot.Robot.connect" title="anki_vector.robot.Robot.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect()</span></code></a> and <a class="reference internal" href="#anki_vector.robot.Robot.disconnect" title="anki_vector.robot.Robot.disconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">disconnect()</span></code></a> to explicitly open and close the connection:
+it allows the robot’s connection to continue in the context in which it started.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="c1"># Create a Robot object</span>
+<span class="n">robot</span> <span class="o">=</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span>
+<span class="c1"># Connect to the Robot</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="c1"># Run your commands</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">play_animation_trigger</span><span class="p">(</span><span class="s2">&quot;GreetAfterLongTime&quot;</span><span class="p">)</span>
+<span class="c1"># Disconnect from Vector</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>serial</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Vector’s serial number. The robot’s serial number (ex. 00e20100) is located on the underside of Vector,
+or accessible from Vector’s debug screen. Used to identify which Vector configuration to load.</p></li>
+<li><p><strong>ip</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Vector’s IP address. (optional)</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Vector’s name (in format <code class="code docutils literal notranslate"><span class="pre">&quot;Vector-XXXX&quot;</span></code>) to be used for mDNS discovery. If a Vector with the given name
+is discovered, the <code class="code docutils literal notranslate"><span class="pre">ip</span></code> parameter (and config field) will be overridden.</p></li>
+<li><p><strong>config</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – A custom <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> to override values in Vector’s configuration. (optional)
+Example: <code class="code docutils literal notranslate"><span class="pre">{&quot;cert&quot;:</span> <span class="pre">&quot;/path/to/file.cert&quot;,</span> <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;Vector-XXXX&quot;,</span> <span class="pre">&quot;guid&quot;:</span> <span class="pre">&quot;&lt;secret_key&gt;&quot;}</span></code>
+where <code class="code docutils literal notranslate"><span class="pre">cert</span></code> is the certificate to identify Vector, <code class="code docutils literal notranslate"><span class="pre">name</span></code> is the name on Vector’s face
+when his backpack is double-clicked on the charger, and <code class="code docutils literal notranslate"><span class="pre">guid</span></code> is the authorization token
+that identifies the SDK user. Note: Never share your authentication credentials with anyone.</p></li>
+<li><p><strong>default_logging</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Toggle default logging.</p></li>
+<li><p><strong>behavior_activation_timeout</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The time to wait for control of the robot before failing.</p></li>
+<li><p><strong>cache_animation_lists</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Get the list of animation triggers and animations available at startup.</p></li>
+<li><p><strong>enable_face_detection</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Turn on face detection.</p></li>
+<li><p><strong>estimate_facial_expression</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Turn estimating facial expression on/off. Enabling <code class="code docutils literal notranslate"><span class="pre">estimate_facial_expression</span></code>
+returns a facial expression, the expression values and the <a class="reference internal" href="anki_vector.util.html#anki_vector.util.ImageRect" title="anki_vector.util.ImageRect"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.util.ImageRect</span></code></a>
+for observed face regions (eyes, nose, and mouth) as part of the <code class="code docutils literal notranslate"><span class="pre">RobotObservedFace</span></code> event.
+It is turned off by default as the number of <code class="code docutils literal notranslate"><span class="pre">RobotObservedFace</span></code> events
+are reduced due to the increased processing time.</p></li>
+<li><p><strong>enable_audio_feed</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Turn audio feed on/off.</p></li>
+<li><p><strong>enable_custom_object_detection</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Turn custom object detection on/off.</p></li>
+<li><p><strong>enable_nav_map_feed</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – Turn navigation map feed on/off.</p></li>
+<li><p><strong>show_viewer</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Specifies whether to display a view of Vector’s camera in a window.</p></li>
+<li><p><strong>show_3d_viewer</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Specifies whether to display a 3D view of Vector’s understanding of the world in a window.</p></li>
+<li><p><strong>behavior_control_level</strong> (<a class="reference internal" href="anki_vector.connection.html#anki_vector.connection.ControlPriorityLevel" title="anki_vector.connection.ControlPriorityLevel"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPriorityLevel</span></code></a>) – Request control of Vector’s behavior system at a specific level of control.  Pass
+<code class="code docutils literal notranslate"><span class="pre">None</span></code> if behavior control is not needed.
+See <code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPriorityLevel</span></code> for more information.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.accel">
+<code class="descname">accel</code><a class="headerlink" href="#anki_vector.robot.Robot.accel" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current accelerometer reading (x, y, z)</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_accel</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">accel</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.util.html#anki_vector.util.Vector3" title="anki_vector.util.Vector3"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3</span></code></a></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p><a class="reference internal" href="anki_vector.util.html#anki_vector.util.Vector3" title="anki_vector.util.Vector3"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.util.Vector3</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.anim">
+<code class="descname">anim</code><a class="headerlink" href="#anki_vector.robot.Robot.anim" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the <a class="reference internal" href="anki_vector.animation.html#anki_vector.animation.AnimationComponent" title="anki_vector.animation.AnimationComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnimationComponent</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.animation.html#anki_vector.animation.AnimationComponent" title="anki_vector.animation.AnimationComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnimationComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.audio">
+<code class="descname">audio</code><a class="headerlink" href="#anki_vector.robot.Robot.audio" title="Permalink to this definition">¶</a></dt>
+<dd><p>The audio instance used to control Vector’s microphone feed and speaker playback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.audio.html#anki_vector.audio.AudioComponent" title="anki_vector.audio.AudioComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">AudioComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.behavior">
+<code class="descname">behavior</code><a class="headerlink" href="#anki_vector.robot.Robot.behavior" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the <a class="reference internal" href="anki_vector.behavior.html#anki_vector.behavior.BehaviorComponent" title="anki_vector.behavior.BehaviorComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BehaviorComponent</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.behavior.html#anki_vector.behavior.BehaviorComponent" title="anki_vector.behavior.BehaviorComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BehaviorComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.camera">
+<code class="descname">camera</code><a class="headerlink" href="#anki_vector.robot.Robot.camera" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="anki_vector.camera.html#anki_vector.camera.CameraComponent" title="anki_vector.camera.CameraComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraComponent</span></code></a> instance used to control Vector’s camera feed.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">init_camera_feed</span><span class="p">()</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">latest_image</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">raw_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.camera.html#anki_vector.camera.CameraComponent" title="anki_vector.camera.CameraComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.carrying_object_id">
+<code class="descname">carrying_object_id</code><a class="headerlink" href="#anki_vector.robot.Robot.carrying_object_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID of the object currently being carried (-1 if none)</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="kn">from</span> <span class="nn">anki_vector.util</span> <span class="k">import</span> <span class="n">degrees</span>
+
+<span class="c1"># Set the robot so that he can see a cube.</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">behavior</span><span class="o">.</span><span class="n">set_head_angle</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">behavior</span><span class="o">.</span><span class="n">set_lift_height</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">connect_cube</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">robot</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">connected_light_cube</span><span class="p">:</span>
+        <span class="n">robot</span><span class="o">.</span><span class="n">behavior</span><span class="o">.</span><span class="n">pickup_object</span><span class="p">(</span><span class="n">robot</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">connected_light_cube</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;carrying_object_id: &quot;</span><span class="p">,</span> <span class="n">robot</span><span class="o">.</span><span class="n">carrying_object_id</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.conn">
+<code class="descname">conn</code><a class="headerlink" href="#anki_vector.robot.Robot.conn" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the <a class="reference internal" href="anki_vector.connection.html#anki_vector.connection.Connection" title="anki_vector.connection.Connection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Connection</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.connection.html#anki_vector.connection.Connection" title="anki_vector.connection.Connection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Connection</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.robot.Robot.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><em>timeout=10</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.robot.Robot.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the connection to Vector.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="n">robot</span> <span class="o">=</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">play_animation_trigger</span><span class="p">(</span><span class="s2">&quot;GreetAfterLongTime&quot;</span><span class="p">)</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The time to allow for a connection before a
+<a class="reference internal" href="anki_vector.exceptions.html#anki_vector.exceptions.VectorTimeoutException" title="anki_vector.exceptions.VectorTimeoutException"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.exceptions.VectorTimeoutException</span></code></a> is raised.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.robot.Robot.disconnect">
+<code class="descname">disconnect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.robot.Robot.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the connection with Vector.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="n">robot</span> <span class="o">=</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">play_animation_trigger</span><span class="p">(</span><span class="s2">&quot;GreetAfterLongTime&quot;</span><span class="p">)</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.enable_audio_feed">
+<code class="descname">enable_audio_feed</code><a class="headerlink" href="#anki_vector.robot.Robot.enable_audio_feed" title="Permalink to this definition">¶</a></dt>
+<dd><p>The audio feed enabled/disabled</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns whether the audio feed is enabled</p>
+</dd>
+<dt class="field-even">Setter</dt>
+<dd class="field-even"><p>Enable/disable the audio feed</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="n">enable_audio_feed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">enable_audio_feed</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.events">
+<code class="descname">events</code><a class="headerlink" href="#anki_vector.robot.Robot.events" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the <a class="reference internal" href="anki_vector.events.html#anki_vector.events.EventHandler" title="anki_vector.events.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.events.html#anki_vector.events.EventHandler" title="anki_vector.events.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.faces">
+<code class="descname">faces</code><a class="headerlink" href="#anki_vector.robot.Robot.faces" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the <a class="reference internal" href="anki_vector.faces.html#anki_vector.faces.FaceComponent" title="anki_vector.faces.FaceComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">FaceComponent</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.faces.html#anki_vector.faces.FaceComponent" title="anki_vector.faces.FaceComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">FaceComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.force_async">
+<code class="descname">force_async</code><a class="headerlink" href="#anki_vector.robot.Robot.force_async" title="Permalink to this definition">¶</a></dt>
+<dd><p>A flag used to determine if this is a <a class="reference internal" href="#anki_vector.robot.Robot" title="anki_vector.robot.Robot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Robot</span></code></a> or <a class="reference internal" href="#anki_vector.robot.AsyncRobot" title="anki_vector.robot.AsyncRobot"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncRobot</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.robot.Robot.get_battery_state">
+<code class="descname">get_battery_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.robot.Robot.get_battery_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the current state of the robot and cube batteries.</p>
+<p>The robot is considered fully-charged above 4.1 volts. At 3.6V, the robot is approaching low charge.</p>
+<p>Robot battery level values are as follows:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 11%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Level</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Low</p></td>
+<td><p>3.6V or less. If on charger, 4V or less.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Nominal</p></td>
+<td><p>Normal operating levels.</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Full</p></td>
+<td><p>This state can only be achieved when Vector is on the charger</p></td>
+</tr>
+</tbody>
+</table>
+<p>Cube battery level values are shown below:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 11%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Level</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Low</p></td>
+<td><p>1.1V or less.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Normal</p></td>
+<td><p>Normal operating levels.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connecting to a cube...&quot;</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">connect_cube</span><span class="p">()</span>
+
+    <span class="n">battery_state</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_battery_state</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">battery_state</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot battery voltage: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">battery_state</span><span class="o">.</span><span class="n">battery_volts</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot battery Level: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">battery_state</span><span class="o">.</span><span class="n">battery_level</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot battery is charging: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">battery_state</span><span class="o">.</span><span class="n">is_charging</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot is on charger platform: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">battery_state</span><span class="o">.</span><span class="n">is_on_charger_platform</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot suggested charger time: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">battery_state</span><span class="o">.</span><span class="n">suggested_charger_sec</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cube battery level: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">battery_state</span><span class="o">.</span><span class="n">cube_battery</span><span class="o">.</span><span class="n">level</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cube battery voltage: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">battery_state</span><span class="o">.</span><span class="n">cube_battery</span><span class="o">.</span><span class="n">battery_volts</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cube battery seconds since last reading: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">battery_state</span><span class="o">.</span><span class="n">cube_battery</span><span class="o">.</span><span class="n">time_since_last_reading_sec</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cube battery factory id: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">battery_state</span><span class="o">.</span><span class="n">cube_battery</span><span class="o">.</span><span class="n">factory_id</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BatteryStateResponse</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.robot.Robot.get_version_state">
+<code class="descname">get_version_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.robot.Robot.get_version_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the versioning information for Vector, including Vector’s os_version and engine_build_id.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">version_state</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_version_state</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">version_state</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot os_version: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">version_state</span><span class="o">.</span><span class="n">os_version</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot engine_build_id: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">version_state</span><span class="o">.</span><span class="n">engine_build_id</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VersionStateResponse</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.gyro">
+<code class="descname">gyro</code><a class="headerlink" href="#anki_vector.robot.Robot.gyro" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current gyroscope reading (x, y, z)</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_gyro</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">gyro</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.util.html#anki_vector.util.Vector3" title="anki_vector.util.Vector3"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector3</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.head_angle_rad">
+<code class="descname">head_angle_rad</code><a class="headerlink" href="#anki_vector.robot.Robot.head_angle_rad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector’s head angle (up/down).</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_head_angle_rad</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">head_angle_rad</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.head_tracking_object_id">
+<code class="descname">head_tracking_object_id</code><a class="headerlink" href="#anki_vector.robot.Robot.head_tracking_object_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID of the object the head is tracking to (-1 if none)</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_head_tracking_object_id</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">head_tracking_object_id</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.last_image_time_stamp">
+<code class="descname">last_image_time_stamp</code><a class="headerlink" href="#anki_vector.robot.Robot.last_image_time_stamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The robot’s timestamp for the last image seen.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_last_image_time_stamp</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">last_image_time_stamp</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.left_wheel_speed_mmps">
+<code class="descname">left_wheel_speed_mmps</code><a class="headerlink" href="#anki_vector.robot.Robot.left_wheel_speed_mmps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector’s left wheel speed in mm/sec</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_left_wheel_speed_mmps</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">left_wheel_speed_mmps</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.lift_height_mm">
+<code class="descname">lift_height_mm</code><a class="headerlink" href="#anki_vector.robot.Robot.lift_height_mm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Height of Vector’s lift from the ground.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_lift_height_mm</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">lift_height_mm</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.localized_to_object_id">
+<code class="descname">localized_to_object_id</code><a class="headerlink" href="#anki_vector.robot.Robot.localized_to_object_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID of the object that the robot is localized to (-1 if none)</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_localized_to_object_id</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">localized_to_object_id</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.motors">
+<code class="descname">motors</code><a class="headerlink" href="#anki_vector.robot.Robot.motors" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the <a class="reference internal" href="anki_vector.motors.html#anki_vector.motors.MotorComponent" title="anki_vector.motors.MotorComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">MotorComponent</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.motors.html#anki_vector.motors.MotorComponent" title="anki_vector.motors.MotorComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">MotorComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.nav_map">
+<code class="descname">nav_map</code><a class="headerlink" href="#anki_vector.robot.Robot.nav_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the <a class="reference internal" href="anki_vector.nav_map.html#anki_vector.nav_map.NavMapComponent" title="anki_vector.nav_map.NavMapComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">NavMapComponent</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.nav_map.html#anki_vector.nav_map.NavMapComponent" title="anki_vector.nav_map.NavMapComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">NavMapComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.photos">
+<code class="descname">photos</code><a class="headerlink" href="#anki_vector.robot.Robot.photos" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the <a class="reference internal" href="anki_vector.photos.html#anki_vector.photos.PhotographComponent" title="anki_vector.photos.PhotographComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhotographComponent</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.photos.html#anki_vector.photos.PhotographComponent" title="anki_vector.photos.PhotographComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhotographComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.pose">
+<code class="descname">pose</code><a class="headerlink" href="#anki_vector.robot.Robot.pose" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current pose (position and orientation) of Vector.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_robot_pose</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">pose</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.util.html#anki_vector.util.Pose" title="anki_vector.util.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pose</span></code></a></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p><a class="reference internal" href="anki_vector.util.html#anki_vector.util.Pose" title="anki_vector.util.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.util.Pose</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.pose_angle_rad">
+<code class="descname">pose_angle_rad</code><a class="headerlink" href="#anki_vector.robot.Robot.pose_angle_rad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector’s pose angle (heading in X-Y plane).</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_pose_angle_rad</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">pose_angle_rad</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.pose_pitch_rad">
+<code class="descname">pose_pitch_rad</code><a class="headerlink" href="#anki_vector.robot.Robot.pose_pitch_rad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector’s pose pitch (angle up/down).</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_pose_pitch_rad</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">pose_pitch_rad</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.proximity">
+<code class="descname">proximity</code><a class="headerlink" href="#anki_vector.robot.Robot.proximity" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="anki_vector.proximity.html#anki_vector.proximity.ProximityComponent" title="anki_vector.proximity.ProximityComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProximityComponent</span></code></a> containing state related to object proximity detection.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">proximity_data</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">proximity</span><span class="o">.</span><span class="n">last_sensor_reading</span>
+    <span class="k">if</span> <span class="n">proximity_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">proximity_data</span><span class="o">.</span><span class="n">distance</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.proximity.html#anki_vector.proximity.ProximityComponent" title="anki_vector.proximity.ProximityComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProximityComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.right_wheel_speed_mmps">
+<code class="descname">right_wheel_speed_mmps</code><a class="headerlink" href="#anki_vector.robot.Robot.right_wheel_speed_mmps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector’s right wheel speed in mm/sec</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">current_right_wheel_speed_mmps</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">right_wheel_speed_mmps</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.screen">
+<code class="descname">screen</code><a class="headerlink" href="#anki_vector.robot.Robot.screen" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the <a class="reference internal" href="anki_vector.screen.html#anki_vector.screen.ScreenComponent" title="anki_vector.screen.ScreenComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScreenComponent</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.screen.html#anki_vector.screen.ScreenComponent" title="anki_vector.screen.ScreenComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScreenComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.status">
+<code class="descname">status</code><a class="headerlink" href="#anki_vector.robot.Robot.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>A property that exposes various status properties of the robot.</p>
+<p>This status provides a simple mechanism to, for example, detect if any
+of Vector’s motors are moving, determine if Vector is being held, or if
+he is on the charger.  The full list is available in the
+<a class="reference internal" href="anki_vector.status.html#anki_vector.status.RobotStatus" title="anki_vector.status.RobotStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotStatus</span></code></a> class documentation.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">robot</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">is_being_held</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vector is being held!&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vector is not being held.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.status.html#anki_vector.status.RobotStatus" title="anki_vector.status.RobotStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotStatus</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.touch">
+<code class="descname">touch</code><a class="headerlink" href="#anki_vector.robot.Robot.touch" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="anki_vector.touch.html#anki_vector.touch.TouchComponent" title="anki_vector.touch.TouchComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">TouchComponent</span></code></a> containing state related to object touch detection.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Robot is being touched: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">robot</span><span class="o">.</span><span class="n">touch</span><span class="o">.</span><span class="n">last_sensor_reading</span><span class="o">.</span><span class="n">is_being_touched</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.touch.html#anki_vector.touch.TouchComponent" title="anki_vector.touch.TouchComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">TouchComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.viewer">
+<code class="descname">viewer</code><a class="headerlink" href="#anki_vector.robot.Robot.viewer" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="anki_vector.viewer.html#anki_vector.viewer.ViewerComponent" title="anki_vector.viewer.ViewerComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ViewerComponent</span></code></a> instance used to render Vector’s camera feed.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="c1"># Render video for 5 seconds</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># Disable video render and camera feed for 5 seconds</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.viewer.html#anki_vector.viewer.ViewerComponent" title="anki_vector.viewer.ViewerComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ViewerComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.viewer_3d">
+<code class="descname">viewer_3d</code><a class="headerlink" href="#anki_vector.robot.Robot.viewer_3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="anki_vector.viewer.html#anki_vector.viewer.Viewer3DComponent" title="anki_vector.viewer.Viewer3DComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Viewer3DComponent</span></code></a> instance used to render Vector’s navigation map.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="n">show_3d_viewer</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">enable_nav_map_feed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="c1"># Render 3D view of navigation map for 5 seconds</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.viewer.html#anki_vector.viewer.Viewer3DComponent" title="anki_vector.viewer.Viewer3DComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Viewer3DComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.vision">
+<code class="descname">vision</code><a class="headerlink" href="#anki_vector.robot.Robot.vision" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="anki_vector.vision.html#anki_vector.vision.VisionComponent" title="anki_vector.vision.VisionComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">VisionComponent</span></code></a> containing functionality related to vision based object detection.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">vision</span><span class="o">.</span><span class="n">enable_custom_object_detection</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.vision.html#anki_vector.vision.VisionComponent" title="anki_vector.vision.VisionComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">VisionComponent</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.robot.Robot.world">
+<code class="descname">world</code><a class="headerlink" href="#anki_vector.robot.Robot.world" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the <a class="reference internal" href="anki_vector.world.html#anki_vector.world.World" title="anki_vector.world.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">World</span></code></a> instance, or None if the World is not yet initialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.world.html#anki_vector.world.World" title="anki_vector.world.World"><code class="xref py py-class docutils literal notranslate"><span class="pre">World</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.robot.AsyncRobot">
+<em class="property">class </em><code class="descclassname">anki_vector.robot.</code><code class="descname">AsyncRobot</code><span class="sig-paren">(</span><em>serial=None</em>, <em>ip=None</em>, <em>name=None</em>, <em>config=None</em>, <em>default_logging=True</em>, <em>behavior_activation_timeout=10</em>, <em>cache_animation_lists=True</em>, <em>enable_face_detection=False</em>, <em>estimate_facial_expression=False</em>, <em>enable_audio_feed=False</em>, <em>enable_custom_object_detection=False</em>, <em>enable_nav_map_feed=None</em>, <em>show_viewer=False</em>, <em>show_3d_viewer=False</em>, <em>behavior_control_level=&lt;ControlPriorityLevel.DEFAULT_PRIORITY: 20&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.robot.AsyncRobot" title="Permalink to this definition">¶</a></dt>
+<dd><p>The AsyncRobot object is just like the Robot object, but allows multiple commands
+to be executed at the same time. To achieve this, all grpc function calls also
+return a <a class="reference external" href="https://docs.python.org/3.6/library/concurrent.futures.html#concurrent.futures.Future" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a>.</p>
+<p>1. Using <code class="code docutils literal notranslate"><span class="pre">with</span></code>: it works just like opening a file, and will close when
+the <code class="code docutils literal notranslate"><span class="pre">with</span></code> block’s indentation ends.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="kn">from</span> <span class="nn">anki_vector.util</span> <span class="k">import</span> <span class="n">degrees</span>
+
+<span class="c1"># Create the robot connection</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">AsyncRobot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="c1"># Start saying text asynchronously</span>
+    <span class="n">say_future</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">behavior</span><span class="o">.</span><span class="n">say_text</span><span class="p">(</span><span class="s2">&quot;Now is the time&quot;</span><span class="p">)</span>
+    <span class="c1"># Turn robot, wait for completion</span>
+    <span class="n">turn_future</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">behavior</span><span class="o">.</span><span class="n">turn_in_place</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">360</span><span class="p">))</span>
+    <span class="n">turn_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="c1"># Play greet animation trigger, wait for completion</span>
+    <span class="n">greet_future</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">play_animation_trigger</span><span class="p">(</span><span class="s2">&quot;GreetAfterLongTime&quot;</span><span class="p">)</span>
+    <span class="n">greet_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="c1"># Make sure text has been spoken</span>
+    <span class="n">say_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>2. Using <code class="xref py py-func docutils literal notranslate"><span class="pre">connect()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">disconnect()</span></code> to explicitly open and close the connection:
+it allows the robot’s connection to continue in the context in which it started.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="kn">from</span> <span class="nn">anki_vector.util</span> <span class="k">import</span> <span class="n">degrees</span>
+
+<span class="c1"># Create a Robot object</span>
+<span class="n">robot</span> <span class="o">=</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">AsyncRobot</span><span class="p">()</span>
+<span class="c1"># Connect to Vector</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="c1"># Start saying text asynchronously</span>
+<span class="n">say_future</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">behavior</span><span class="o">.</span><span class="n">say_text</span><span class="p">(</span><span class="s2">&quot;Now is the time&quot;</span><span class="p">)</span>
+<span class="c1"># Turn robot, wait for completion</span>
+<span class="n">turn_future</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">behavior</span><span class="o">.</span><span class="n">turn_in_place</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">360</span><span class="p">))</span>
+<span class="n">turn_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="c1"># Play greet animation trigger, wait for completion</span>
+<span class="n">greet_future</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">play_animation_trigger</span><span class="p">(</span><span class="s2">&quot;GreetAfterLongTime&quot;</span><span class="p">)</span>
+<span class="n">greet_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="c1"># Make sure text has been spoken</span>
+<span class="n">say_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="c1"># Disconnect from Vector</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>When getting callbacks from the event stream, it’s important to understand that function calls
+return a <a class="reference external" href="https://docs.python.org/3.6/library/concurrent.futures.html#concurrent.futures.Future" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a> and not an <a class="reference external" href="https://docs.python.org/3.6/library/asyncio-task.html#asyncio.Future" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Future</span></code></a>. This means any
+async callback functions will need to use <a class="reference external" href="https://docs.python.org/3.6/library/asyncio-task.html#asyncio.wrap_future" title="(in Python v3.6)"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.wrap_future()</span></code></a> to be able to await the
+function’s response.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wrap_future</span><span class="p">(</span><span class="n">robot</span><span class="o">.</span><span class="n">anim</span><span class="o">.</span><span class="n">play_animation_trigger</span><span class="p">(</span><span class="s1">&#39;GreetAfterLongTime&#39;</span><span class="p">))</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wrap_future</span><span class="p">(</span><span class="n">robot</span><span class="o">.</span><span class="n">behavior</span><span class="o">.</span><span class="n">set_head_angle</span><span class="p">(</span><span class="n">anki_vector</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="mi">40</span><span class="p">)))</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">parse_command_args</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">AsyncRobot</span><span class="p">(</span><span class="n">serial</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">serial</span><span class="p">,</span> <span class="n">enable_face_detection</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+        <span class="n">robot</span><span class="o">.</span><span class="n">behavior</span><span class="o">.</span><span class="n">set_head_angle</span><span class="p">(</span><span class="n">anki_vector</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+        <span class="n">robot</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">Events</span><span class="o">.</span><span class="n">robot_observed_face</span><span class="p">)</span>
+
+        <span class="c1"># Waits 10 seconds. Show Vector your face.</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>serial</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Vector’s serial number. The robot’s serial number (ex. 00e20100) is located on the underside of Vector,
+or accessible from Vector’s debug screen. Used to identify which Vector configuration to load.</p></li>
+<li><p><strong>ip</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Vector’s IP Address. (optional)</p></li>
+<li><p><strong>config</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – A custom <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> to override values in Vector’s configuration. (optional)
+Example: <code class="code docutils literal notranslate"><span class="pre">{&quot;cert&quot;:</span> <span class="pre">&quot;/path/to/file.cert&quot;,</span> <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;Vector-XXXX&quot;,</span> <span class="pre">&quot;guid&quot;:</span> <span class="pre">&quot;&lt;secret_key&gt;&quot;}</span></code>
+where <code class="code docutils literal notranslate"><span class="pre">cert</span></code> is the certificate to identify Vector, <code class="code docutils literal notranslate"><span class="pre">name</span></code> is the name on Vector’s face
+when his backpack is double-clicked on the charger, and <code class="code docutils literal notranslate"><span class="pre">guid</span></code> is the authorization token
+that identifies the SDK user. Note: Never share your authentication credentials with anyone.</p></li>
+<li><p><strong>default_logging</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Toggle default logging.</p></li>
+<li><p><strong>behavior_activation_timeout</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The time to wait for control of the robot before failing.</p></li>
+<li><p><strong>cache_animation_lists</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Get the list of animation triggers and animations available at startup.</p></li>
+<li><p><strong>enable_face_detection</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Turn on face detection.</p></li>
+<li><p><strong>estimate_facial_expression</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Turn estimating facial expression on/off.</p></li>
+<li><p><strong>enable_audio_feed</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Turn audio feed on/off.</p></li>
+<li><p><strong>enable_custom_object_detection</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Turn custom object detection on/off.</p></li>
+<li><p><strong>enable_nav_map_feed</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – Turn navigation map feed on/off.</p></li>
+<li><p><strong>show_viewer</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Specifies whether to display a view of Vector’s camera in a window.</p></li>
+<li><p><strong>show_3d_viewer</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Specifies whether to display a 3D view of Vector’s understanding of the world in a window.</p></li>
+<li><p><strong>behavior_control_level</strong> (<a class="reference internal" href="anki_vector.connection.html#anki_vector.connection.ControlPriorityLevel" title="anki_vector.connection.ControlPriorityLevel"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPriorityLevel</span></code></a>) – Request control of Vector’s behavior system at a specific level of control.  Pass
+<code class="code docutils literal notranslate"><span class="pre">None</span></code> if behavior control is not needed.
+See <code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPriorityLevel</span></code> for more information.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="anki_vector.screen.html" class="btn btn-neutral float-right" title="anki_vector.screen" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+        <a href="anki_vector.proximity.html" class="btn btn-neutral float-left" title="anki_vector.proximity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anki
+      <span class="lastupdated">
+        Last updated on Apr, 30, 2019 10:42:16 Coordinated Universal Time.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+
+
+
+
+
+</body>
+</html>

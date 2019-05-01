@@ -1,0 +1,716 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>anki_vector.camera &mdash; Vector SDK 0.6.0 documentation</title>
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+
+
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="anki_vector.camera_viewer" href="anki_vector.camera_viewer.html" />
+    <link rel="prev" title="anki_vector.behavior" href="anki_vector.behavior.html" />
+  <script>
+    /**
+     * Developer.anki.com Iframe Integration
+     */
+    (function(window) {
+      // Only apply if we're embedded
+      var parent = window.top;
+      if (parent === window || !parent || !parent.postMessage) {
+        return;
+      }
+
+      // For styling necessary only when embedded in an iframe.
+      function addEmbededClass() {
+        document.body.classList.add("embedded");
+      }
+
+      // Change document base to that of Developer.anki.com so that navigation happens at the top level.
+      function updateDocumentBase() {
+        var base = document.createElement('base');
+        base.target='_parent';
+        base.href= document.referrer;
+        var head = document.getElementsByTagName('head')[0];
+        var firstChild = head.firstChild;
+        head.insertBefore(base, firstChild);
+      }
+
+      // Signal to Developer.anki.com that we're done loading and ready to receive messages.
+      // We send page title to Developer.anki.com so that the browser displays it.
+      function notifyParentWindowOnLoad() {
+        parent.postMessage({
+          event: 'load',
+          docTitle: document.title
+        }, '*');
+      }
+
+      function initEmbeddedMode() {
+        addEmbededClass();
+        updateDocumentBase();
+        notifyParentWindowOnLoad();
+      }
+
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', function(){
+          initEmbeddedMode();
+        });
+      } else {
+        initEmbeddedMode();
+      }
+
+      // Handle messages from Developer.anki.com.
+      function receiveMessage(event) {
+        var eventName = event.data.event;
+        if(eventName === 'hashchange') {
+          window.location.hash = event.data.hash;
+          // Workaround for IOS Safari lack of support for window.location.hash scrolling.
+          var linkedElement = document.getElementById(event.data.hash.replace('#', ''))
+          if (linkedElement && linkedElement.scrollIntoView) {
+            linkedElement.scrollIntoView();
+          }
+        }
+      }
+      window.addEventListener("message", receiveMessage, false);
+
+    })(window);
+  </script>
+  <style>
+    /* Allows scrolling to anchor links on IOS Safari */
+    .embedded .wy-grid-for-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+  </style>
+  <!-- <script async src='https://www.google-analytics.com/analytics.js'></script> -->
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+
+  <div class="wy-grid-for-nav">
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+            <a href="../index.html" class="icon icon-home"> Vector SDK
+
+
+
+          </a>
+
+
+
+
+              <div class="version">
+                0.6.0
+              </div>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+
+
+
+              <p class="caption"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../initial.html">Initial Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-macos.html">Installation - macOS / OS X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-windows.html">Installation - Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-linux.html">Installation - Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced-tips.html">Advanced Tips</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Downloads</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getstarted.html">Getting Started With the Vector SDK</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">The API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.html">anki_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.animation.html">anki_vector.animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.annotate.html">anki_vector.annotate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.audio.html">anki_vector.audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.behavior.html">anki_vector.behavior</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">anki_vector.camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.camera_viewer.html">anki_vector.camera_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.color.html">anki_vector.color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.connection.html">anki_vector.connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.events.html">anki_vector.events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.exceptions.html">anki_vector.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.faces.html">anki_vector.faces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.lights.html">anki_vector.lights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.mdns.html">anki_vector.mdns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.messaging.html">anki_vector.messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.motors.html">anki_vector.motors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.nav_map.html">anki_vector.nav_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.objects.html">anki_vector.objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.html">anki_vector.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl.html">anki_vector.opengl.opengl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl_vector.html">anki_vector.opengl.opengl_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.opengl.opengl_viewer.html">anki_vector.opengl.opengl_viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.photos.html">anki_vector.photos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.proximity.html">anki_vector.proximity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.robot.html">anki_vector.robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.screen.html">anki_vector.screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.status.html">anki_vector.status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.touch.html">anki_vector.touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.user_intent.html">anki_vector.user_intent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.util.html">anki_vector.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.viewer.html">anki_vector.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.vision.html">anki_vector.vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anki_vector.world.html">anki_vector.world</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" aria-label="top navigation">
+
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vector SDK</a>
+
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+        <div class="rst-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+
+          <li><a href="../api.html">The API</a> &raquo;</li>
+
+      <li>anki_vector.camera</li>
+
+
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="../_sources/generated/anki_vector.camera.rst.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+
+  </ul>
+
+
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="module-anki_vector.camera">
+<span id="anki-vector-camera"></span><h1>anki_vector.camera<a class="headerlink" href="#module-anki_vector.camera" title="Permalink to this headline">¶</a></h1>
+<p>Support for Vector’s camera.</p>
+<p>Vector has a built-in camera which he uses to observe the world around him.</p>
+<p>The <a class="reference internal" href="#anki_vector.camera.CameraComponent" title="anki_vector.camera.CameraComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraComponent</span></code></a> class defined in this module is made available as
+<a class="reference internal" href="anki_vector.robot.html#anki_vector.robot.Robot.camera" title="anki_vector.robot.Robot.camera"><code class="xref py py-attr docutils literal notranslate"><span class="pre">anki_vector.robot.Robot.camera</span></code></a> and can be used to enable/disable image
+sending and observe images being sent by the robot. It emits <a class="reference internal" href="#anki_vector.camera.EvtNewRawCameraImage" title="anki_vector.camera.EvtNewRawCameraImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">EvtNewRawCameraImage</span></code></a>
+and <a class="reference internal" href="#anki_vector.camera.EvtNewCameraImage" title="anki_vector.camera.EvtNewCameraImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">EvtNewCameraImage</span></code></a> objects whenever a new camera image is available.</p>
+<p>The camera resolution is 1280 x 720 with a field of view of 90 deg (H) x 50 deg (V).</p>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-center">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.camera.CameraComponent" title="anki_vector.camera.CameraComponent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CameraComponent</span></code></a>(robot)</p></td>
+<td><p>Represents Vector’s camera.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#anki_vector.camera.CameraImage" title="anki_vector.camera.CameraImage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CameraImage</span></code></a>(raw_image, image_annotator, image_id)</p></td>
+<td><p>A single image from the robot’s camera.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#anki_vector.camera.EvtNewCameraImage" title="anki_vector.camera.EvtNewCameraImage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EvtNewCameraImage</span></code></a>(image)</p></td>
+<td><p>Dispatched when a new camera image is received and processed from the robot’s camera.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#anki_vector.camera.EvtNewRawCameraImage" title="anki_vector.camera.EvtNewRawCameraImage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EvtNewRawCameraImage</span></code></a>(image)</p></td>
+<td><p>Dispatched when a new raw image is received from the robot’s camera.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="anki_vector.camera.EvtNewRawCameraImage">
+<em class="property">class </em><code class="descclassname">anki_vector.camera.</code><code class="descname">EvtNewRawCameraImage</code><span class="sig-paren">(</span><em>image</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera.EvtNewRawCameraImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatched when a new raw image is received from the robot’s camera.</p>
+<p>See also <a class="reference internal" href="#anki_vector.camera.EvtNewCameraImage" title="anki_vector.camera.EvtNewCameraImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">EvtNewCameraImage</span></code></a> which provides access
+to both the raw image and a scaled and annotated version.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="kn">from</span> <span class="nn">anki_vector</span> <span class="k">import</span> <span class="n">events</span>
+
+<span class="k">def</span> <span class="nf">on_new_raw_camera_image</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">done</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Display new camera image&quot;</span><span class="p">)</span>
+    <span class="n">event</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">done</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">init_camera_feed</span><span class="p">()</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">on_new_raw_camera_image</span><span class="p">,</span> <span class="n">events</span><span class="o">.</span><span class="n">Events</span><span class="o">.</span><span class="n">new_raw_camera_image</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------ waiting for camera events, press ctrl+c to exit early ------&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">done</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------ Did not receive a new camera image! ------&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></a>) – A raw camera image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.camera.EvtNewCameraImage">
+<em class="property">class </em><code class="descclassname">anki_vector.camera.</code><code class="descname">EvtNewCameraImage</code><span class="sig-paren">(</span><em>image</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera.EvtNewCameraImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatched when a new camera image is received and processed from the robot’s camera.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="kn">from</span> <span class="nn">anki_vector</span> <span class="k">import</span> <span class="n">events</span>
+
+<span class="k">def</span> <span class="nf">on_new_camera_image</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">done</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Display new annotated camera image with id </span><span class="si">{event.image.image_id}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">annotated_image</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">annotate_image</span><span class="p">()</span>
+    <span class="n">annotated_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">done</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="n">enable_face_detection</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">enable_custom_object_detection</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">init_camera_feed</span><span class="p">()</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">on_new_camera_image</span><span class="p">,</span> <span class="n">events</span><span class="o">.</span><span class="n">Events</span><span class="o">.</span><span class="n">new_camera_image</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------ waiting for camera events, press ctrl+c to exit early ------&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">done</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------ Did not receive a new camera image! ------&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param</dt>
+<dd class="field-odd"><p>A wrapped camera image object that contains the raw image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.camera.CameraComponent">
+<em class="property">class </em><code class="descclassname">anki_vector.camera.</code><code class="descname">CameraComponent</code><span class="sig-paren">(</span><em>robot</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera.CameraComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents Vector’s camera.</p>
+<p>The CameraComponent object receives images from Vector’s camera, unpacks the data,
+composes it and makes it available as latest_image.</p>
+<p>The <a class="reference internal" href="anki_vector.robot.html#anki_vector.robot.Robot" title="anki_vector.robot.Robot"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.robot.Robot</span></code></a> or <a class="reference internal" href="anki_vector.robot.html#anki_vector.robot.AsyncRobot" title="anki_vector.robot.AsyncRobot"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.robot.AsyncRobot</span></code></a> instance observes the camera.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">init_camera_feed</span><span class="p">()</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">latest_image</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">raw_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>robot</strong> – A reference to the owner Robot object.</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="anki_vector.camera.CameraComponent.annotator_factory">
+<code class="descname">annotator_factory</code><a class="headerlink" href="#anki_vector.camera.CameraComponent.annotator_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="anki_vector.annotate.html#anki_vector.annotate.ImageAnnotator" title="anki_vector.annotate.ImageAnnotator"><code class="xref py py-class docutils literal notranslate"><span class="pre">anki_vector.annotate.ImageAnnotator</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.camera.CameraComponent.capture_single_image">
+<code class="descname">capture_single_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera.CameraComponent.capture_single_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request to capture a single image from the robot’s camera.</p>
+<p>This call requests the robot to capture an image and returns the
+received image, formatted as a Pillow image. This differs from <cite>latest_image</cite>,
+which maintains the last image received from the camera feed (if enabled).</p>
+<p>Note that when the camera feed is enabled this call returns the <cite>latest_image</cite>.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">capture_single_image</span><span class="p">()</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">raw_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#anki_vector.camera.CameraImage" title="anki_vector.camera.CameraImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraImage</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.camera.CameraComponent.close_camera_feed">
+<code class="descname">close_camera_feed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera.CameraComponent.close_camera_feed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancel camera feed task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.camera.CameraComponent.image_annotator">
+<code class="descname">image_annotator</code><a class="headerlink" href="#anki_vector.camera.CameraComponent.image_annotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>The image annotator used to add annotations to the raw camera images.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="n">show_viewer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="c1"># Annotations (enabled by default) are displayed on the camera feed</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="c1"># Disable all annotations</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">image_annotator</span><span class="o">.</span><span class="n">annotation_enabled</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="anki_vector.annotate.html#anki_vector.annotate.ImageAnnotator" title="anki_vector.annotate.ImageAnnotator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageAnnotator</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.camera.CameraComponent.image_streaming_enabled">
+<code class="descname">image_streaming_enabled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera.CameraComponent.image_streaming_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if image streaming is enabled on the robot</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">image_streaming_enabled</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">image_streaming_enabled</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">image_streaming_enabled</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot is streaming video&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot is not streaming video&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="anki_vector.camera.CameraComponent.init_camera_feed">
+<code class="descname">init_camera_feed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera.CameraComponent.init_camera_feed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin camera feed task.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">init_camera_feed</span><span class="p">()</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">latest_image</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">raw_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.camera.CameraComponent.latest_image">
+<code class="descname">latest_image</code><a class="headerlink" href="#anki_vector.camera.CameraComponent.latest_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>The most recently processed image received from the robot.</p>
+<p>The resolution of latest_image is 640x360.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the Pillow Image representing the latest image</p>
+</dd>
+</dl>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">init_camera_feed</span><span class="p">()</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">latest_image</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">raw_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#anki_vector.camera.CameraImage" title="anki_vector.camera.CameraImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">CameraImage</span></code></a></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Image.Image</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.camera.CameraComponent.latest_image_id">
+<code class="descname">latest_image_id</code><a class="headerlink" href="#anki_vector.camera.CameraComponent.latest_image_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The most recently processed image’s id received from the robot.</p>
+<p>Used only to track chunks of the same image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>Returns the id for the latest image</p>
+</dd>
+</dl>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">init_camera_feed</span><span class="p">()</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">latest_image</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">raw_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;latest_image_id: </span><span class="si">{robot.camera.latest_image_id}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="anki_vector.camera.CameraImage">
+<em class="property">class </em><code class="descclassname">anki_vector.camera.</code><code class="descname">CameraImage</code><span class="sig-paren">(</span><em>raw_image</em>, <em>image_annotator</em>, <em>image_id</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera.CameraImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>A single image from the robot’s camera.
+This wraps a raw image and provides an <a class="reference internal" href="#anki_vector.camera.CameraImage.annotate_image" title="anki_vector.camera.CameraImage.annotate_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">annotate_image()</span></code></a> method
+that can resize and add dynamic annotations to the image, such as
+marking up the location of objects and faces.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">capture_single_image</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Displaying image with id </span><span class="si">{image.image_id}</span><span class="s2">, received at </span><span class="si">{image.image_recv_time}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">raw_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raw_image</strong> (<a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></a>) – The raw unprocessed image from the camera.</p></li>
+<li><p><strong>image_annotator</strong> (<a class="reference internal" href="anki_vector.annotate.html#anki_vector.annotate.ImageAnnotator" title="anki_vector.annotate.ImageAnnotator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageAnnotator</span></code></a>) – The image annotation object.</p></li>
+<li><p><strong>image_id</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – An image number that increments on every new image received.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="anki_vector.camera.CameraImage.annotate_image">
+<code class="descname">annotate_image</code><span class="sig-paren">(</span><em>scale=None</em>, <em>fit_size=None</em>, <em>resample_mode=0</em><span class="sig-paren">)</span><a class="headerlink" href="#anki_vector.camera.CameraImage.annotate_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds any enabled annotations to the image.
+Optionally resizes the image prior to annotations being applied.  The
+aspect ratio of the resulting image always matches that of the raw image.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anki_vector</span>
+
+<span class="k">with</span> <span class="n">anki_vector</span><span class="o">.</span><span class="n">Robot</span><span class="p">()</span> <span class="k">as</span> <span class="n">robot</span><span class="p">:</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">capture_single_image</span><span class="p">()</span>
+    <span class="n">annotated_image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">annotate_image</span><span class="p">()</span>
+    <span class="n">annotated_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]) – If set then the base image will be scaled by the
+supplied multiplier.  Cannot be combined with fit_size</p></li>
+<li><p><strong>fit_size</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/typing.html#typing.Optional" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#tuple" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>]) – If set, then scale the image to fit inside
+the supplied (width, height) dimensions. The original aspect
+ratio will be preserved.  Cannot be combined with scale.</p></li>
+<li><p><strong>resample_mode</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The resampling mode to use when scaling the
+image. Should be either <a class="reference internal" href="anki_vector.annotate.html#anki_vector.annotate.RESAMPLE_MODE_NEAREST" title="anki_vector.annotate.RESAMPLE_MODE_NEAREST"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RESAMPLE_MODE_NEAREST</span></code></a>
+(fast) or <a class="reference internal" href="anki_vector.annotate.html#anki_vector.annotate.RESAMPLE_MODE_BILINEAR" title="anki_vector.annotate.RESAMPLE_MODE_BILINEAR"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RESAMPLE_MODE_BILINEAR</span></code></a> (slower,
+but smoother).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.camera.CameraImage.image_id">
+<code class="descname">image_id</code><a class="headerlink" href="#anki_vector.camera.CameraImage.image_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>An image number that increments on every new image received.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.camera.CameraImage.image_recv_time">
+<code class="descname">image_recv_time</code><a class="headerlink" href="#anki_vector.camera.CameraImage.image_recv_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>The time the image was received and processed by the SDK.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="anki_vector.camera.CameraImage.raw_image">
+<code class="descname">raw_image</code><a class="headerlink" href="#anki_vector.camera.CameraImage.raw_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>The raw unprocessed image from the camera.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pillow.readthedocs.io/en/latest/reference/Image.html#PIL.Image.Image" title="(in Pillow (PIL Fork) v6.1.0.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="anki_vector.camera_viewer.html" class="btn btn-neutral float-right" title="anki_vector.camera_viewer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+        <a href="anki_vector.behavior.html" class="btn btn-neutral float-left" title="anki_vector.behavior" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anki
+      <span class="lastupdated">
+        Last updated on Apr, 30, 2019 10:42:16 Coordinated Universal Time.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+
+
+
+
+
+</body>
+</html>

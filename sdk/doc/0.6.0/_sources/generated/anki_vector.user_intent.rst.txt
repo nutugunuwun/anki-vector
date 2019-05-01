@@ -1,0 +1,23 @@
+anki\_vector.user\_intent
+=========================
+
+.. automodule:: anki_vector.user_intent
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      UserIntent
+      UserIntentEvent
+   
+   
+
+   
+   
+   
